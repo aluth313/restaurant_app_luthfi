@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_app/widget/restaurant_card.dart';
 
 class RestaurantList extends StatelessWidget {
   static const routeName = '/restaurant_list';
@@ -23,7 +24,7 @@ class RestaurantList extends StatelessWidget {
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  return Text('data');
+                  return RestaurantCard();
                 },
               )
             ],
