@@ -17,8 +17,8 @@ class RestaurantList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                  margin: EdgeInsets.only(top: 20), child: Text('Restaurant')),
-              Text('Recommendation restauran for you!'),
+                  margin: EdgeInsets.only(top: 20), child: Text('Restaurant', style: Theme.of(context).textTheme.headline4,)),
+              Text('Recommendation restauran for you!', style: Theme.of(context).textTheme.subtitle1,),
               ListView.builder(
                 itemCount: 50,
                 physics: NeverScrollableScrollPhysics(),

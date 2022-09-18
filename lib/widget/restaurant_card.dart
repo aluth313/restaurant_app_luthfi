@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_app/common/styles.dart';
 
 class RestaurantCard extends StatelessWidget {
   const RestaurantCard({super.key});
@@ -30,7 +31,7 @@ class RestaurantCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Melting Pot'),
+                    Text('Melting Pot', style: Theme.of(context).textTheme.headline6,),
                     SizedBox(
                       height: 5,
                     ),
@@ -38,8 +39,11 @@ class RestaurantCard extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.place_outlined,
+                          size: 18,
+                          color: secondaryColor,
                         ),
-                        Text('Medan')
+                        SizedBox(width: 5,),
+                        Text('Medan', style: Theme.of(context).textTheme.bodyText2,)
                       ],
                     ),
                     SizedBox(
@@ -49,8 +53,11 @@ class RestaurantCard extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.star_outlined,
+                          size: 18,
+                          color: yellowColor,
                         ),
-                        Text('4.6')
+                        SizedBox(width: 5,),
+                        Text('4.6', style: Theme.of(context).textTheme.bodyText1,)
                       ],
                     ),
                   ],

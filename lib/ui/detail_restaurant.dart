@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_app/common/styles.dart';
 import 'package:restaurant_app/widget/menu_card.dart';
 
 class RestaurantDetail extends StatelessWidget {
@@ -31,15 +32,27 @@ class RestaurantDetail extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Restaurant 1'),
+            Text(
+              'Restaurant 1',
+              style: Theme.of(context).textTheme.headline5,
+            ),
+            SizedBox(height: 8,),
             Row(
               children: [
                 Icon(
                   Icons.place_outlined,
+                  size: 18,
+                  color: secondaryColor,
                 ),
-                Text('Medan')
+                SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  'Medan',
+                  style: Theme.of(context).textTheme.bodyText2,
+                )
               ],
-            )
+            ),
           ],
         ),
       );
@@ -52,13 +65,14 @@ class RestaurantDetail extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Description'),
+            Text('Description', style: Theme.of(context).textTheme.headline6,),
             SizedBox(
               height: 10,
             ),
             Text(
               'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.',
               textAlign: TextAlign.justify,
+              style: Theme.of(context).textTheme.bodyText2,
             )
           ],
         ),
@@ -72,11 +86,11 @@ class RestaurantDetail extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Menus'),
-            SizedBox(
-              height: 8,
-            ),
-            Text('Foods'),
+            Text('Menus', style: Theme.of(context).textTheme.headline6,),
+            // SizedBox(
+            //   height: 8,
+            // ),
+            // Text('Foods'),
             SizedBox(
               height: 10,
             ),
