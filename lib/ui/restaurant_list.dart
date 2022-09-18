@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/widget/restaurant_card.dart';
 
 class RestaurantList extends StatelessWidget {
@@ -17,14 +18,28 @@ class RestaurantList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                  margin: EdgeInsets.only(top: 20), child: Text('Restaurant', style: Theme.of(context).textTheme.headline4,)),
-              Text('Recommendation restauran for you!', style: Theme.of(context).textTheme.subtitle1,),
-              ListView.builder(
-                itemCount: 50,
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return RestaurantCard();
+                  margin: EdgeInsets.only(top: 20),
+                  child: Text(
+                    'Restaurant',
+                    style: Theme.of(context).textTheme.headline4,
+                  )),
+              Text(
+                'Recommendation restauran for you!',
+                style: Theme.of(context).textTheme.subtitle1,
+              ),
+              FutureBuilder(
+                future: DefaultAssetBundle.of(context)
+                    .loadString('assets/local_restaurant.json'),
+                builder: (context, snapshot) {
+                  // final List<Restaurant> restaurants = 
+                  return ListView.builder(
+                    itemCount: 50,
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return RestaurantCard();
+                    },
+                  );
                 },
               )
             ],
