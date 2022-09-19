@@ -90,7 +90,9 @@ class RestaurantDetail extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(width: 8,),
+            SizedBox(
+              width: 8,
+            ),
             Icon(
               Icons.star_outlined,
               size: 20,
@@ -149,7 +151,6 @@ class RestaurantDetail extends StatelessWidget {
             GridView.builder(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 200,
-                  // childAspectRatio: 3 / 2,
                   crossAxisSpacing: 5,
                   mainAxisSpacing: 5),
               itemCount: restaurantElement.menus.foods.length,
@@ -181,7 +182,6 @@ class RestaurantDetail extends StatelessWidget {
             GridView.builder(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 200,
-                  // childAspectRatio: 3 / 2,
                   crossAxisSpacing: 5,
                   mainAxisSpacing: 5),
               itemCount: restaurantElement.menus.drinks.length,
