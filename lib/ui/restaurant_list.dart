@@ -24,21 +24,36 @@ class RestaurantList extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline4,
                   )),
               Text(
-                'Recommendation restauran for you!',
+                'Recommendation restaurant for you!',
                 style: Theme.of(context).textTheme.subtitle1,
               ),
               FutureBuilder(
                 future: DefaultAssetBundle.of(context)
                     .loadString('assets/local_restaurant.json'),
                 builder: (context, snapshot) {
-                  // final List<Restaurant> restaurants = 
-                  return ListView.builder(
-                    itemCount: 50,
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return RestaurantCard();
-                    },
+                  if (snapshot.hasError) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Data gagal ditampilkan.')));
+                    return Center(child: Text('Data gagal ditampilkan.'));
+                  }
+
+                  if (snapshot.hasData) {
+                    final List<RestaurantElement> restaurants =
+                        parseRestaurants(snapshot.data);
+                    return ListView.builder(
+                      itemCount: restaurants.length,
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return RestaurantCard(
+                          restaurantElement: restaurants[index],
+                        );
+                      },
+                    );
+                  }
+
+                  return Center(
+                    child: CircularProgressIndicator(),
                   );
                 },
               )

@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/common/styles.dart';
+import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/widget/menu_card.dart';
 
 class RestaurantDetail extends StatelessWidget {
   static const routeName = '/restaurant_detail';
+  final RestaurantElement restaurantElement;
 
-  const RestaurantDetail({super.key});
+  const RestaurantDetail(this.restaurantElement, {super.key});
 
   @override
   Widget build(BuildContext context) {
     Widget _header() {
-      return Container(
-        width: double.infinity,
-        height: 250,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(18),
-              bottomRight: Radius.circular(18),
-            ),
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(
-                    'https://restaurant-api.dicoding.dev/images/medium/14'))),
+      return Hero(
+        tag: restaurantElement.pictureId,
+        child: Container(
+          width: double.infinity,
+          height: 250,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(18),
+                bottomRight: Radius.circular(18),
+              ),
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(restaurantElement.pictureId))),
+        ),
       );
     }
 
@@ -33,10 +37,12 @@ class RestaurantDetail extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Restaurant 1',
+              restaurantElement.name,
               style: Theme.of(context).textTheme.headline5,
             ),
-            SizedBox(height: 8,),
+            SizedBox(
+              height: 8,
+            ),
             Row(
               children: [
                 Icon(
@@ -48,7 +54,7 @@ class RestaurantDetail extends StatelessWidget {
                   width: 5,
                 ),
                 Text(
-                  'Medan',
+                  restaurantElement.city,
                   style: Theme.of(context).textTheme.bodyText2,
                 )
               ],
@@ -65,12 +71,15 @@ class RestaurantDetail extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Description', style: Theme.of(context).textTheme.headline6,),
+            Text(
+              'Description',
+              style: Theme.of(context).textTheme.headline6,
+            ),
             SizedBox(
               height: 10,
             ),
             Text(
-              'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.',
+              restaurantElement.description,
               textAlign: TextAlign.justify,
               style: Theme.of(context).textTheme.bodyText2,
             )
@@ -80,34 +89,36 @@ class RestaurantDetail extends StatelessWidget {
     }
 
     Widget _menus() {
+      List menuList = [
+        ...restaurantElement.menus.foods,
+        ...restaurantElement.menus.drinks
+      ];
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 24),
         margin: EdgeInsets.only(top: 20, bottom: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Menus', style: Theme.of(context).textTheme.headline6,),
-            // SizedBox(
-            //   height: 8,
-            // ),
-            // Text('Foods'),
+            Text(
+              'Menus',
+              style: Theme.of(context).textTheme.headline6,
+            ),
             SizedBox(
               height: 10,
             ),
-            GridView.count(
+            GridView.builder(
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200,
+                  // childAspectRatio: 3 / 2,
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5),
+              itemCount: menuList.length,
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              crossAxisCount: 2,
-              children: [
-                MenuCard(),
-                MenuCard(),
-                MenuCard(),
-                MenuCard(),
-                MenuCard(),
-                MenuCard(),
-                MenuCard(),
-              ],
-            )
+              itemBuilder: (context, index) {
+                return MenuCard(menuList[index].name);
+              },
+            ),
           ],
         ),
       );

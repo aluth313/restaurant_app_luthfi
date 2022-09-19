@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_app/common/styles.dart';
 
 class MenuCard extends StatelessWidget {
-  const MenuCard({super.key});
+  final String name;
+
+  const MenuCard(this.name, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +13,7 @@ class MenuCard extends StatelessWidget {
       height: 70,
       margin: EdgeInsets.only(bottom: 10, right: 10),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18), color: Color(0xffF3F3F3)),
+          borderRadius: BorderRadius.circular(18), color: greyColor),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -26,11 +29,18 @@ class MenuCard extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-            child: Text('Paket rosemary', style: Theme.of(context).textTheme.bodyLarge,),
+            child: Text(
+              name,
+              style: Theme.of(context).textTheme.bodyLarge,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           Padding(
             padding: EdgeInsets.only(left: 8, right: 8, bottom: 8),
-            child: Text('IDR 15.000', style: Theme.of(context).textTheme.caption,),
+            child: Text(
+              'IDR 15.000',
+              style: Theme.of(context).textTheme.caption,
+            ),
           ),
         ],
       ),
