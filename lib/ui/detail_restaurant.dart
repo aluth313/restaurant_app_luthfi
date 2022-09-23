@@ -33,22 +33,23 @@ class RestaurantDetail extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: SafeArea(
-                child: CircleAvatar(
-              backgroundColor: greyColor,
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: defaultTargetPlatform == TargetPlatform.android
-                      ? Icon(
-                          Icons.arrow_back,
-                          color: blackColor,
-                        )
-                      : Icon(
-                          Icons.arrow_back_ios_outlined,
-                          color: blackColor,
-                        )),
-            )),
+              child: CircleAvatar(
+                backgroundColor: greyColor,
+                child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: defaultTargetPlatform == TargetPlatform.android
+                    ? Icon(
+                        Icons.arrow_back,
+                        color: blackColor,
+                      )
+                    : Icon(
+                        Icons.arrow_back_ios_outlined,
+                        color: blackColor,
+                      )),
+              ),
+            ),
           )
         ],
       );
@@ -148,18 +149,18 @@ class RestaurantDetail extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            GridView.builder(
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 200,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5),
-              itemCount: restaurantElement.menus.foods.length,
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return MenuCard(restaurantElement.menus.foods[index].name);
-              },
-            ),
+            // GridView.builder(
+            //   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            //       maxCrossAxisExtent: 200,
+            //       crossAxisSpacing: 5,
+            //       mainAxisSpacing: 5),
+            //   itemCount: restaurantElement.menus.foods.length,
+            //   physics: NeverScrollableScrollPhysics(),
+            //   shrinkWrap: true,
+            //   itemBuilder: (context, index) {
+            //     return MenuCard(restaurantElement.menus.foods[index].name);
+            //   },
+            // ),
           ],
         ),
       );
@@ -179,18 +180,18 @@ class RestaurantDetail extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            GridView.builder(
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 200,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5),
-              itemCount: restaurantElement.menus.drinks.length,
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return MenuCard(restaurantElement.menus.drinks[index].name);
-              },
-            ),
+            // GridView.builder(
+            //   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            //       maxCrossAxisExtent: 200,
+            //       crossAxisSpacing: 5,
+            //       mainAxisSpacing: 5),
+            //   itemCount: restaurantElement.menus.drinks.length,
+            //   physics: NeverScrollableScrollPhysics(),
+            //   shrinkWrap: true,
+            //   itemBuilder: (context, index) {
+            //     return MenuCard(restaurantElement.menus.drinks[index].name);
+            //   },
+            // ),
           ],
         ),
       );
@@ -198,6 +199,7 @@ class RestaurantDetail extends StatelessWidget {
 
     return Scaffold(
       body: ListView(
+        padding: EdgeInsets.zero,
         physics: ScrollPhysics(),
         children: [
           _header(),
