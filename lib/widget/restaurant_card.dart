@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/common/styles.dart';
+import 'package:restaurant_app/data/api/restaurant_service.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
 
 class RestaurantCard extends StatelessWidget {
@@ -11,23 +12,27 @@ class RestaurantCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/restaurant_detail', arguments: restaurantElement);
+        Navigator.pushNamed(context, '/restaurant_detail',
+            arguments: restaurantElement);
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 10),
         child: Row(
           children: [
             Hero(
-              tag: restaurantElement.pictureId,
+              tag: '${RestaurantService.baseUrlImage}medium/${restaurantElement.pictureId}',
               child: Container(
                 width: 80,
                 height: 80,
                 margin: EdgeInsets.only(right: 10),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(18),
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(restaurantElement.pictureId))),
+                  borderRadius: BorderRadius.circular(18),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(
+                        '${RestaurantService.baseUrlImage}small/${restaurantElement.pictureId}'),
+                  ),
+                ),
               ),
             ),
             Expanded(

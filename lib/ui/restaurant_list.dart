@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
+import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/widget/restaurant_card.dart';
 
 class RestaurantList extends StatelessWidget {
@@ -27,36 +29,68 @@ class RestaurantList extends StatelessWidget {
                 'Recommendation restaurant for you!',
                 style: Theme.of(context).textTheme.subtitle1,
               ),
-              FutureBuilder(
-                future: DefaultAssetBundle.of(context)
-                    .loadString('assets/local_restaurant.json'),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text('Data gagal ditampilkan.')));
-                    return Center(child: Text('Data gagal ditampilkan.'));
-                  }
-
-                  if (snapshot.hasData) {
-                    final List<RestaurantElement> restaurants =
-                        parseRestaurants(snapshot.data);
+              Consumer<RestaurantProvider>(
+                builder: (context, state, _) {
+                  if (state.state == ResultState.loading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state.state == ResultState.hasData) {
                     return ListView.builder(
-                      itemCount: restaurants.length,
+                      itemCount: state.result.restaurants.length,
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return RestaurantCard(
-                          restaurantElement: restaurants[index],
+                          restaurantElement: state.result.restaurants[index],
                         );
                       },
                     );
+                  } else if (state.state == ResultState.noData) {
+                    return Center(
+                      child: Text(state.message),
+                    );
+                  } else if (state.state == ResultState.error) {
+                    return Center(
+                      child: Text(state.message),
+                    );
+                  } else {
+                    return Center(
+                      child: Text(''),
+                    );
                   }
-
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
                 },
-              )
+              ),
+              // FutureBuilder(
+              //   future: DefaultAssetBundle.of(context)
+              //       .loadString('assets/local_restaurant.json'),
+              //   builder: (context, snapshot) {
+              //     if (snapshot.hasError) {
+              //       ScaffoldMessenger.of(context).showSnackBar(
+              //           SnackBar(content: Text('Data gagal ditampilkan.')));
+              //       return Center(child: Text('Data gagal ditampilkan.'));
+              //     }
+
+              //     if (snapshot.hasData) {
+              //       final List<RestaurantElement> restaurants =
+              //           parseRestaurants(snapshot.data);
+              //       return ListView.builder(
+              //         itemCount: restaurants.length,
+              //         physics: NeverScrollableScrollPhysics(),
+              //         shrinkWrap: true,
+              //         itemBuilder: (context, index) {
+              //           return RestaurantCard(
+              //             restaurantElement: restaurants[index],
+              //           );
+              //         },
+              //       );
+              //     }
+
+              //     return Center(
+              //       child: CircularProgressIndicator(),
+              //     );
+              //   },
+              // )
             ],
           ),
         ),

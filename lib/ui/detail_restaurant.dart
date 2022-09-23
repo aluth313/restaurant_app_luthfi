@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/common/styles.dart';
+import 'package:restaurant_app/data/api/restaurant_service.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/widget/menu_card.dart';
 
@@ -16,7 +17,8 @@ class RestaurantDetail extends StatelessWidget {
       return Stack(
         children: [
           Hero(
-            tag: restaurantElement.pictureId,
+            tag:
+                '${RestaurantService.baseUrlImage}medium/${restaurantElement.pictureId}',
             child: Container(
               width: double.infinity,
               height: 250,
@@ -27,7 +29,8 @@ class RestaurantDetail extends StatelessWidget {
                   ),
                   image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(restaurantElement.pictureId))),
+                      image: NetworkImage(
+                          '${RestaurantService.baseUrlImage}medium/${restaurantElement.pictureId}'))),
             ),
           ),
           Padding(
@@ -36,18 +39,18 @@ class RestaurantDetail extends StatelessWidget {
               child: CircleAvatar(
                 backgroundColor: greyColor,
                 child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: defaultTargetPlatform == TargetPlatform.android
-                    ? Icon(
-                        Icons.arrow_back,
-                        color: blackColor,
-                      )
-                    : Icon(
-                        Icons.arrow_back_ios_outlined,
-                        color: blackColor,
-                      )),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: defaultTargetPlatform == TargetPlatform.android
+                        ? Icon(
+                            Icons.arrow_back,
+                            color: blackColor,
+                          )
+                        : Icon(
+                            Icons.arrow_back_ios_outlined,
+                            color: blackColor,
+                          )),
               ),
             ),
           )
