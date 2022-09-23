@@ -31,56 +31,54 @@ class RestaurantCard extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      restaurantElement.name,
-                      style: Theme.of(context).textTheme.headline6,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.place_outlined,
-                          size: 18,
-                          color: secondaryColor,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          restaurantElement.city,
-                          style: Theme.of(context).textTheme.bodyText2,
-                          overflow: TextOverflow.ellipsis,
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.star_outlined,
-                          size: 18,
-                          color: yellowColor,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          restaurantElement.rating.toString(),
-                          style: Theme.of(context).textTheme.bodyText1,
-                        )
-                      ],
-                    ),
-                  ],
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    restaurantElement.name,
+                    style: Theme.of(context).textTheme.headline6,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.place_outlined,
+                        size: 18,
+                        color: secondaryColor,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        restaurantElement.city,
+                        style: Theme.of(context).textTheme.bodyText2,
+                        overflow: TextOverflow.ellipsis,
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.star_outlined,
+                        size: 18,
+                        color: yellowColor,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        restaurantElement.rating.toString(),
+                        style: Theme.of(context).textTheme.bodyText1,
+                      )
+                    ],
+                  ),
+                ],
               ),
             ),
           ],
