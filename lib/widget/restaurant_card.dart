@@ -13,14 +13,15 @@ class RestaurantCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, '/restaurant_detail',
-            arguments: restaurantElement);
+            arguments: restaurantElement.id);
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 10),
         child: Row(
           children: [
             Hero(
-              tag: '${RestaurantService.baseUrlImage}medium/${restaurantElement.pictureId}',
+              tag:
+                  '${RestaurantService.baseUrlImage}medium/${restaurantElement.pictureId}',
               child: Container(
                 width: 80,
                 height: 80,

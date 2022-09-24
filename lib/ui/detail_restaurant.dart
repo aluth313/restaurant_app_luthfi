@@ -1,19 +1,37 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurant_app/common/styles.dart';
 import 'package:restaurant_app/data/api/restaurant_service.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
+import 'package:restaurant_app/data/model/restaurant_detail_model.dart';
+import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/widget/menu_card.dart';
+import 'package:restaurant_app/widget/review_card.dart';
 
-class RestaurantDetail extends StatelessWidget {
+class RestaurantDetail extends StatefulWidget {
   static const routeName = '/restaurant_detail';
-  final RestaurantElement restaurantElement;
+  // final RestaurantElement restaurantElement;
+  final String id;
 
-  const RestaurantDetail(this.restaurantElement, {super.key});
+  const RestaurantDetail(this.id, {super.key});
+
+  @override
+  State<RestaurantDetail> createState() => _RestaurantDetailState();
+}
+
+class _RestaurantDetailState extends State<RestaurantDetail> {
+  @override
+  void initState() {
+    super.initState();
+    final dataDetailRestaurant =
+        Provider.of<RestaurantProvider>(context, listen: false);
+    dataDetailRestaurant.detailRestaurant(widget.id);
+  }
 
   @override
   Widget build(BuildContext context) {
-    Widget _header() {
+    Widget _header(restaurantElement) {
       return Stack(
         children: [
           Hero(
@@ -58,7 +76,13 @@ class RestaurantDetail extends StatelessWidget {
       );
     }
 
-    Widget _title() {
+    Widget _title(RestaurantDetailItem restaurantElement) {
+      String _convertToStringCategory(List<RestaurantCategory> categories) {
+        List<String> dataCategory = [];
+        dataCategory = categories.map((data) => data.name).toList();
+        return dataCategory.join(', ');
+      }
+
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 24),
         margin: EdgeInsets.only(top: 20),
@@ -85,9 +109,33 @@ class RestaurantDetail extends StatelessWidget {
                       SizedBox(
                         width: 5,
                       ),
-                      Text(
-                        restaurantElement.city,
-                        style: Theme.of(context).textTheme.bodyText2,
+                      Expanded(
+                        child: Text(
+                          restaurantElement.city,
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.restaurant_outlined,
+                        size: 18,
+                        color: secondaryColor,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Expanded(
+                        child: Text(
+                          _convertToStringCategory(
+                              restaurantElement.categories),
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
                       )
                     ],
                   ),
@@ -114,7 +162,7 @@ class RestaurantDetail extends StatelessWidget {
       );
     }
 
-    Widget _description() {
+    Widget _description(RestaurantDetailItem restaurantElement) {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 24),
         margin: EdgeInsets.only(top: 20),
@@ -138,7 +186,7 @@ class RestaurantDetail extends StatelessWidget {
       );
     }
 
-    Widget _foods() {
+    Widget _foods(RestaurantDetailItem restaurantElement) {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 24),
         margin: EdgeInsets.only(top: 20, bottom: 20),
@@ -152,24 +200,24 @@ class RestaurantDetail extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            // GridView.builder(
-            //   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            //       maxCrossAxisExtent: 200,
-            //       crossAxisSpacing: 5,
-            //       mainAxisSpacing: 5),
-            //   itemCount: restaurantElement.menus.foods.length,
-            //   physics: NeverScrollableScrollPhysics(),
-            //   shrinkWrap: true,
-            //   itemBuilder: (context, index) {
-            //     return MenuCard(restaurantElement.menus.foods[index].name);
-            //   },
-            // ),
+            GridView.builder(
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200,
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5),
+              itemCount: restaurantElement.menus.foods.length,
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return MenuCard(restaurantElement.menus.foods[index].name);
+              },
+            ),
           ],
         ),
       );
     }
 
-    Widget _drinks() {
+    Widget _drinks(RestaurantDetailItem restaurantElement) {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 24),
         margin: EdgeInsets.only(top: 20, bottom: 20),
@@ -183,34 +231,86 @@ class RestaurantDetail extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            // GridView.builder(
-            //   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            //       maxCrossAxisExtent: 200,
-            //       crossAxisSpacing: 5,
-            //       mainAxisSpacing: 5),
-            //   itemCount: restaurantElement.menus.drinks.length,
-            //   physics: NeverScrollableScrollPhysics(),
-            //   shrinkWrap: true,
-            //   itemBuilder: (context, index) {
-            //     return MenuCard(restaurantElement.menus.drinks[index].name);
-            //   },
-            // ),
+            GridView.builder(
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200,
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5),
+              itemCount: restaurantElement.menus.drinks.length,
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return MenuCard(restaurantElement.menus.drinks[index].name);
+              },
+            ),
+          ],
+        ),
+      );
+    }
+
+    Widget _reviews(RestaurantDetailItem restaurantElement) {
+      return Container(
+        padding: EdgeInsets.symmetric(horizontal: 24),
+        margin: EdgeInsets.only(top: 20, bottom: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Reviews',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ListView.builder(
+              itemCount: restaurantElement.customerReviews.length,
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return ReviewCard(
+                  customerReview: restaurantElement.customerReviews[index],
+                );
+              },
+            )
           ],
         ),
       );
     }
 
     return Scaffold(
-      body: ListView(
-        padding: EdgeInsets.zero,
-        physics: ScrollPhysics(),
-        children: [
-          _header(),
-          _title(),
-          _description(),
-          _foods(),
-          _drinks(),
-        ],
+      body: Consumer<RestaurantProvider>(
+        builder: (context, data, child) {
+          if (data.stateDetail == ResultState.loading) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (data.stateDetail == ResultState.hasData) {
+            return ListView(
+              padding: EdgeInsets.zero,
+              physics: ScrollPhysics(),
+              children: [
+                _header(data.resultDetail.restaurantDetailItem),
+                _title(data.resultDetail.restaurantDetailItem),
+                _description(data.resultDetail.restaurantDetailItem),
+                _foods(data.resultDetail.restaurantDetailItem),
+                _drinks(data.resultDetail.restaurantDetailItem),
+                _reviews(data.resultDetail.restaurantDetailItem),
+              ],
+            );
+          } else if (data.stateDetail == ResultState.noData) {
+            return Center(
+              child: Text(data.message),
+            );
+          } else if (data.stateDetail == ResultState.error) {
+            return Center(
+              child: Text(data.message),
+            );
+          } else {
+            return Center(
+              child: Text(''),
+            );
+          }
+        },
       ),
     );
   }

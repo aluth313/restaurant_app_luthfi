@@ -6,6 +6,8 @@ const Color yellowColor = Colors.yellow;
 const Color whiteColor = Colors.white;
 const Color blackColor = Colors.black;
 const Color greyColor = Color(0xffF3F3F3);
+const Color cardReviewColor = Color(0xffF8F9FD);
+const Color reviewerColor = Color(0xff0F69D3);
 
 final TextTheme myTextTheme = TextTheme(
   headline1: GoogleFonts.poppins(
@@ -34,5 +36,6 @@ final TextTheme myTextTheme = TextTheme(
       fontSize: 10, fontWeight: FontWeight.w400, letterSpacing: 1.5),
 );
 
-TextStyle splashText = GoogleFonts.poppins(
-    color: Colors.white, fontSize: 23, fontWeight: FontWeight.w500);
+// TextStyle splashText = GoogleFonts.poppins(
+//     color: Colors.white, fontSize: 23, fontWeight: FontWeight.w500);
+TextStyle customStyleText = GoogleFonts.poppins(color: Colors.black);

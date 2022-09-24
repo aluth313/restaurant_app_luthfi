@@ -41,7 +41,11 @@ class SplashScreen extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 30),
               child: Text(
                 'Get Your Favourite Foods',
-                style: splashText,
+                style: customStyleText.copyWith(
+                  color: Colors.white,
+                  fontSize: 23,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
           ),

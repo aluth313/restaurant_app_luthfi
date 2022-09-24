@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/data/api/restaurant_service.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
+import 'package:restaurant_app/data/model/restaurant_detail_model.dart';
 
 enum ResultState { loading, noData, hasData, error }
 
@@ -12,14 +13,19 @@ class RestaurantProvider extends ChangeNotifier {
   }
 
   late Restaurant _restaurant;
+  late RestaurantDetailModel _restaurantDetailModel;
   late ResultState _state;
+  late ResultState _stateDetail;
   String _message = '';
 
   String get message => _message;
 
   Restaurant get result => _restaurant;
 
+  RestaurantDetailModel get resultDetail => _restaurantDetailModel;
+
   ResultState get state => _state;
+  ResultState get stateDetail => _stateDetail;
 
   Future<dynamic> _fetchAllRestaurant() async {
     try {
@@ -37,6 +43,27 @@ class RestaurantProvider extends ChangeNotifier {
       }
     } catch (e) {
       _state = ResultState.error;
+      notifyListeners();
+      return _message = 'Terjadi Kesalahan ketika mengambil data dari internet';
+    }
+  }
+  
+  Future<dynamic> detailRestaurant(String id) async {
+    try {
+      _stateDetail = ResultState.loading;
+      notifyListeners();
+      final restaurant = await restaurantService.restaurantDetail(id);
+      if (restaurant.restaurantDetailItem == null) {
+        _stateDetail = ResultState.noData;
+        notifyListeners();
+        return _message = 'Data Kosong';
+      } else {
+        _stateDetail = ResultState.hasData;
+        notifyListeners();
+        return _restaurantDetailModel = restaurant;
+      }
+    } catch (e) {
+      _stateDetail = ResultState.error;
       notifyListeners();
       return _message = 'Terjadi Kesalahan ketika mengambil data dari internet';
     }

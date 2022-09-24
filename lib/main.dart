@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           SplashScreen.routeName: (context) => SplashScreen(),
           RestaurantList.routeName: (context) => RestaurantList(),
           RestaurantDetail.routeName: (context) => RestaurantDetail(
-              ModalRoute.of(context)?.settings.arguments as RestaurantElement),
+              ModalRoute.of(context)?.settings.arguments as String),
         },
       ),
     );
