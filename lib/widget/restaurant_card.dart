@@ -5,16 +5,19 @@ import 'package:restaurant_app/data/model/restaurant.dart';
 
 class RestaurantCard extends StatelessWidget {
   final RestaurantElement restaurantElement;
+  final VoidCallback onTap;
 
-  const RestaurantCard({super.key, required this.restaurantElement});
+  const RestaurantCard(
+      {super.key, required this.restaurantElement, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, '/restaurant_detail',
-            arguments: restaurantElement.id);
-      },
+      onTap: onTap, 
+      // () {
+      //   Navigator.pushNamed(context, '/restaurant_detail',
+      //       arguments: restaurantElement.id);
+      // },
       child: Container(
         margin: EdgeInsets.only(bottom: 10),
         child: Row(

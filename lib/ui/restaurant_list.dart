@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
+import 'package:restaurant_app/ui/detail_restaurant.dart';
 import 'package:restaurant_app/widget/restaurant_card.dart';
 
 class RestaurantList extends StatelessWidget {
@@ -38,11 +39,15 @@ class RestaurantList extends StatelessWidget {
                   } else if (state.state == ResultState.hasData) {
                     return ListView.builder(
                       itemCount: state.result.restaurants.length,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return RestaurantCard(
                           restaurantElement: state.result.restaurants[index],
+                          onTap: () {
+                            state.detailRestaurant(state.result.restaurants[index].id);
+                            Navigator.pushNamed(context, RestaurantDetail.routeName);
+                          },
                         );
                       },
                     );
