@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/ui/detail_restaurant.dart';
+import 'package:restaurant_app/ui/search_restaurant.dart';
 import 'package:restaurant_app/widget/restaurant_card.dart';
 
 class RestaurantList extends StatelessWidget {
@@ -20,12 +20,22 @@ class RestaurantList extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, RestaurantSearch.routeName);
+                },
+                child: Container(
                   margin: EdgeInsets.only(top: 20),
-                  child: Text(
-                    'Restaurant',
-                    style: Theme.of(context).textTheme.headline4,
-                  )),
+                  alignment: Alignment.centerRight,
+                  child: Icon(
+                    Icons.search_outlined,
+                  ),
+                ),
+              ),
+              Text(
+                'Restaurant',
+                style: Theme.of(context).textTheme.headline4,
+              ),
               Text(
                 'Recommendation restaurant for you!',
                 style: Theme.of(context).textTheme.subtitle1,
@@ -45,8 +55,10 @@ class RestaurantList extends StatelessWidget {
                         return RestaurantCard(
                           restaurantElement: state.result.restaurants[index],
                           onTap: () {
-                            state.detailRestaurant(state.result.restaurants[index].id);
-                            Navigator.pushNamed(context, RestaurantDetail.routeName);
+                            state.detailRestaurant(
+                                state.result.restaurants[index].id);
+                            Navigator.pushNamed(
+                                context, RestaurantDetail.routeName);
                           },
                         );
                       },

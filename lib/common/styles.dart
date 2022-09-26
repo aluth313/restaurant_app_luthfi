@@ -5,6 +5,7 @@ const Color secondaryColor = Color(0xffCBCBCB);
 const Color yellowColor = Colors.yellow;
 const Color whiteColor = Colors.white;
 const Color blackColor = Colors.black;
+const Color redColor = Colors.red;
 const Color greyColor = Color(0xffF3F3F3);
 const Color cardReviewColor = Color(0xffF8F9FD);
 const Color reviewerColor = Color(0xff0F69D3);

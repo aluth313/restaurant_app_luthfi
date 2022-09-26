@@ -13,7 +13,7 @@ class RestaurantCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap, 
+      onTap: onTap,
       // () {
       //   Navigator.pushNamed(context, '/restaurant_detail',
       //       arguments: restaurantElement.id);
