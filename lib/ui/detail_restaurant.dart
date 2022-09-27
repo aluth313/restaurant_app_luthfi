@@ -6,6 +6,7 @@ import 'package:restaurant_app/data/api/restaurant_service.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/data/model/restaurant_detail_model.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
+import 'package:restaurant_app/widget/custom_button.dart';
 import 'package:restaurant_app/widget/menu_card.dart';
 import 'package:restaurant_app/widget/review_card.dart';
 
@@ -13,7 +14,7 @@ class RestaurantDetail extends StatelessWidget {
   static const routeName = '/restaurant_detail';
 
   const RestaurantDetail({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     Widget _header(RestaurantDetailItem restaurantElement) {
@@ -240,9 +241,16 @@ class RestaurantDetail extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Reviews',
-              style: Theme.of(context).textTheme.headline6,
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    'Reviews',
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                ),
+                CustomButton(),
+              ],
             ),
             SizedBox(
               height: 10,
