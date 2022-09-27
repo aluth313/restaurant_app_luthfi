@@ -1,13 +1,27 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/common/styles.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/widget/restaurant_card.dart';
 import 'package:restaurant_app/widget/textfield.dart';
 
-class RestaurantSearch extends StatelessWidget {
+class RestaurantSearch extends StatefulWidget {
   static const routeName = '/restaurant_search';
 
   const RestaurantSearch({super.key});
+
+  @override
+  State<RestaurantSearch> createState() => _RestaurantSearchState();
+}
+
+class _RestaurantSearchState extends State<RestaurantSearch> {
+  final searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +34,49 @@ class RestaurantSearch extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Search',
-                style: customStyleText.copyWith(
-                  fontSize: 23,
-                  fontWeight: FontWeight.w400,
-                ),
+              Row(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: greyColor,
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: defaultTargetPlatform == TargetPlatform.android
+                          ? Icon(
+                              Icons.arrow_back,
+                              color: blackColor,
+                            )
+                          : Icon(
+                              Icons.arrow_back_ios_outlined,
+                              color: blackColor,
+                            ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    'Search',
+                    style: customStyleText.copyWith(
+                      fontSize: 23,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
               ),
-              TextFieldCustom(),
+              TextFieldCustom(
+                onChanged: (value) {
+                  print(value);
+                },
+                controller: searchController,
+                suffixIcon: Icon(
+                  Icons.clear_outlined,
+                  color: redColor,
+                ),
+                onTapSuffixIcon: () {},
+                hintText: 'Search...',
+              ),
               // Expanded(
               //     child: Center(
               //   child: Text(

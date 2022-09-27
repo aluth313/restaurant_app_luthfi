@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:restaurant_app/common/styles.dart';
 
 class TextFieldCustom extends StatelessWidget {
-  final Function onChanged;
+  final Function(String value)? onChanged;
+  final VoidCallback? onTapSuffixIcon;
   final TextEditingController controller;
   final String hintText;
   final Icon? suffixIcon;
 
   const TextFieldCustom({
     super.key,
-    required this.onChanged,
+    this.onChanged,
     required this.controller,
     this.suffixIcon,
+    this.onTapSuffixIcon,
     required this.hintText,
   });
 
@@ -23,20 +25,15 @@ class TextFieldCustom extends StatelessWidget {
       ),
       child: TextFormField(
         cursorColor: blackColor,
-        onChanged: (value) {},
+        onChanged: onChanged,
         decoration: InputDecoration(
-          hintText: 'Search...',
+          hintText: hintText,
           prefixIcon: Icon(
             Icons.search_outlined,
           ),
           suffixIcon: InkWell(
-            onTap: () {
-              print('ditekan');
-            },
-            child: Icon(
-              Icons.clear_outlined,
-              color: redColor,
-            ),
+            onTap: onTapSuffixIcon ?? () {},
+            child: suffixIcon ?? SizedBox(),
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
