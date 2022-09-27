@@ -22,6 +22,8 @@ class RestaurantList extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
+                  final restoProv = Provider.of<RestaurantProvider>(context, listen: false);
+                  restoProv.setSearch('');
                   Navigator.pushNamed(context, RestaurantSearch.routeName);
                 },
                 child: Container(

@@ -20,7 +20,7 @@ class RestaurantSearchModel {
     factory RestaurantSearchModel.fromJson(Map<String, dynamic> json) => RestaurantSearchModel(
         error: json["error"],
         founded: json["founded"],
-        restaurants: List<RestaurantElement>.from(json["restaurants"].map((x) => Restaurant.fromJson(x))),
+        restaurants: List<RestaurantElement>.from(json["restaurants"].map((x) => RestaurantElement.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {

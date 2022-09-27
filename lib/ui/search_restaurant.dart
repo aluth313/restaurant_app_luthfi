@@ -1,7 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurant_app/common/styles.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
+import 'package:restaurant_app/provider/restaurant_provider.dart';
+import 'package:restaurant_app/ui/detail_restaurant.dart';
 import 'package:restaurant_app/widget/restaurant_card.dart';
 import 'package:restaurant_app/widget/textfield.dart';
 
@@ -31,88 +34,123 @@ class _RestaurantSearchState extends State<RestaurantSearch> {
           padding: const EdgeInsets.symmetric(
             horizontal: 24,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+          child: Consumer<RestaurantProvider>(
+            builder: (context, state, _) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CircleAvatar(
-                    backgroundColor: greyColor,
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: defaultTargetPlatform == TargetPlatform.android
-                          ? Icon(
-                              Icons.arrow_back,
-                              color: blackColor,
-                            )
-                          : Icon(
-                              Icons.arrow_back_ios_outlined,
-                              color: blackColor,
-                            ),
-                    ),
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: greyColor,
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: defaultTargetPlatform == TargetPlatform.android
+                              ? Icon(
+                                  Icons.arrow_back,
+                                  color: blackColor,
+                                )
+                              : Icon(
+                                  Icons.arrow_back_ios_outlined,
+                                  color: blackColor,
+                                ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        'Search',
+                        style: customStyleText.copyWith(
+                          fontSize: 23,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
                   ),
+                  TextFieldCustom(
+                    onChanged: (value) {
+                      state.setSearch(value);
+                      state.searchRestaurant(value);
+                    },
+                    controller: state.searchController,
+                    // suffixIcon: Icon(
+                    //   Icons.clear_outlined,
+                    //   color: redColor,
+                    // ),
+                    // onTapSuffixIcon: () {
+                    //   state.clearSearch();
+                    // },
+                    hintText: 'Search...',
+                  ),
+                  // Expanded(
+                  //     child: Center(
+                  //   child: Text(
+                  //     'Type something for search restaurant',
+                  //   ),
+                  // )),
                   SizedBox(
-                    width: 8,
+                    height: 10,
                   ),
-                  Text(
-                    'Search',
-                    style: customStyleText.copyWith(
-                      fontSize: 23,
-                      fontWeight: FontWeight.w400,
-                    ),
+                  Expanded(
+                    child: state.searchController.text.isEmpty
+                        ? Center(
+                            child: Text(
+                              'Input untuk mencari data Restoran.',
+                            ),
+                          )
+                        : _result(state),
                   ),
                 ],
-              ),
-              TextFieldCustom(
-                onChanged: (value) {
-                  print(value);
-                },
-                controller: searchController,
-                suffixIcon: Icon(
-                  Icons.clear_outlined,
-                  color: redColor,
-                ),
-                onTapSuffixIcon: () {},
-                hintText: 'Search...',
-              ),
-              // Expanded(
-              //     child: Center(
-              //   child: Text(
-              //     'Type something for search restaurant',
-              //   ),
-              // )),
-              SizedBox(
-                height: 10,
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: 3,
-                  itemBuilder: (context, index) {
-                    return RestaurantCard(
-                      restaurantElement: RestaurantElement(
-                        id: 's1knt6za9kkfw1e867',
-                        name: 'Kafe Kita',
-                        description: 'description',
-                        pictureId: '25',
-                        city: 'city',
-                        rating: 4.5,
-                      ),
-                      onTap: () {
-                        // state.detailRestaurant(
-                        //     state.result.restaurants[index].id);
-                        // Navigator.pushNamed(
-                        //     context, RestaurantDetail.routeName);
-                      },
-                    );
-                  },
-                ),
-              ),
-            ],
+              );
+            },
           ),
         ),
       ),
     );
+  }
+
+  _result(RestaurantProvider state) {
+    if (state.stateSearch == ResultState.hasData) {
+      return ListView.builder(
+        itemCount: state.resultSearch.restaurants.length,
+        itemBuilder: (context, index) {
+          return RestaurantCard(
+            restaurantElement: RestaurantElement(
+              id: state.resultSearch.restaurants[index].id,
+              name: state.resultSearch.restaurants[index].name,
+              description: state.resultSearch.restaurants[index].description,
+              pictureId: state.resultSearch.restaurants[index].pictureId,
+              city: state.resultSearch.restaurants[index].city,
+              rating: state.resultSearch.restaurants[index].rating,
+            ),
+            onTap: () {
+              state.detailRestaurant(
+                  state.resultSearch.restaurants[index].id);
+              Navigator.pushNamed(
+                  context, RestaurantDetail.routeName);
+            },
+          );
+        },
+      );
+    } else if (state.stateSearch == ResultState.loading) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    } else if (state.stateSearch == ResultState.noData) {
+      return Center(
+        child: Text(state.message),
+      );
+    } else if (state.stateSearch == ResultState.error) {
+      return Center(
+        child: Text(state.message),
+      );
+    } else {
+      return Center(
+        child: Text(''),
+      );
+    }
   }
 }

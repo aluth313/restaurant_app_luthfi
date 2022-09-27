@@ -3,17 +3,17 @@ import 'package:restaurant_app/common/styles.dart';
 
 class TextFieldCustom extends StatelessWidget {
   final Function(String value)? onChanged;
-  final VoidCallback? onTapSuffixIcon;
+  // final VoidCallback? onTapSuffixIcon;
   final TextEditingController controller;
   final String hintText;
-  final Icon? suffixIcon;
+  // final Icon? suffixIcon;
 
   const TextFieldCustom({
     super.key,
     this.onChanged,
     required this.controller,
-    this.suffixIcon,
-    this.onTapSuffixIcon,
+    // this.suffixIcon,
+    // this.onTapSuffixIcon,
     required this.hintText,
   });
 
@@ -31,10 +31,10 @@ class TextFieldCustom extends StatelessWidget {
           prefixIcon: Icon(
             Icons.search_outlined,
           ),
-          suffixIcon: InkWell(
-            onTap: onTapSuffixIcon ?? () {},
-            child: suffixIcon ?? SizedBox(),
-          ),
+          // suffixIcon: InkWell(
+          //   onTap: onTapSuffixIcon ?? () {},
+          //   child: suffixIcon ?? SizedBox(),
+          // ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
           ),

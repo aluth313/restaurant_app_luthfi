@@ -20,6 +20,7 @@ class RestaurantProvider extends ChangeNotifier {
   late ResultState _stateDetail;
   late ResultState _stateSearch;
   String _message = '';
+  TextEditingController _searchController = TextEditingController(text: '');
 
   String get message => _message;
 
@@ -30,6 +31,17 @@ class RestaurantProvider extends ChangeNotifier {
   ResultState get state => _state;
   ResultState get stateDetail => _stateDetail;
   ResultState get stateSearch => _stateSearch;
+  TextEditingController get searchController => _searchController;
+
+  void setSearch(String value){
+    _searchController.text = value;
+    notifyListeners();
+  }
+  
+  // void clearSearch(){
+  //   _searchController.clear();
+  //   notifyListeners();
+  // }
 
   Future<dynamic> _fetchAllRestaurant() async {
     try {
@@ -51,7 +63,7 @@ class RestaurantProvider extends ChangeNotifier {
       return _message = 'Terjadi Kesalahan ketika mengambil data dari internet';
     }
   }
-  
+
   Future<dynamic> detailRestaurant(String id) async {
     try {
       _stateDetail = ResultState.loading;
@@ -72,7 +84,7 @@ class RestaurantProvider extends ChangeNotifier {
       return _message = 'Terjadi Kesalahan ketika mengambil data dari internet';
     }
   }
-  
+
   Future<dynamic> searchRestaurant(String query) async {
     try {
       _stateSearch = ResultState.loading;
@@ -89,6 +101,7 @@ class RestaurantProvider extends ChangeNotifier {
       }
     } catch (e) {
       _stateSearch = ResultState.error;
+      print(e);
       notifyListeners();
       return _message = 'Terjadi Kesalahan ketika mengambil data dari internet';
     }
