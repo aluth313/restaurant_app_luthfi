@@ -33,11 +33,11 @@ class RestaurantProvider extends ChangeNotifier {
   ResultState get stateSearch => _stateSearch;
   TextEditingController get searchController => _searchController;
 
-  void setSearch(String value){
+  void setSearch(String value) {
     _searchController.text = value;
     notifyListeners();
   }
-  
+
   // void clearSearch(){
   //   _searchController.clear();
   //   notifyListeners();
@@ -104,6 +104,27 @@ class RestaurantProvider extends ChangeNotifier {
       print(e);
       notifyListeners();
       return _message = 'Terjadi Kesalahan ketika mengambil data dari internet';
+    }
+  }
+
+  Future<dynamic> review(String id, String name, String review) async {
+    try {
+      _state = ResultState.loading;
+      notifyListeners();
+      final responseCode = await restaurantService.review(id, name, review);
+      if (responseCode == 200) {
+        _state = ResultState.hasData;
+        notifyListeners();
+        return responseCode;
+      } else {
+        _state = ResultState.error;
+        notifyListeners();
+        return _message = 'Gagal Mengirimkan Review';
+      }
+    } catch (e) {
+      _state = ResultState.error;
+      notifyListeners();
+      return _message = 'Terjadi Kesalahan ketika mengirimkan review';
     }
   }
 }

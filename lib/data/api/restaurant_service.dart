@@ -17,7 +17,7 @@ class RestaurantService {
       throw Exception('Failed to load list');
     }
   }
-  
+
   Future<RestaurantDetailModel> restaurantDetail(String id) async {
     final response = await http.get(Uri.parse('${_baseUrl}detail/$id'));
     if (response.statusCode == 200) {
@@ -26,13 +26,28 @@ class RestaurantService {
       throw Exception('Failed to get restaurant');
     }
   }
-  
+
   Future<RestaurantSearchModel> searchRestaurant(String query) async {
     final response = await http.get(Uri.parse('${_baseUrl}search?q=$query'));
     if (response.statusCode == 200) {
       return RestaurantSearchModel.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to search');
+    }
+  }
+
+  Future<dynamic> review(String id, String name, String review) async {
+    final response = await http.post(Uri.parse('${_baseUrl}review'),
+        headers: <String, String>{'Content-Type': 'application/json'},
+        body: jsonEncode(<String, String>{
+          'id': id,
+          'name': name,
+          'review': review,
+        }));
+    if (response.statusCode == 201) {
+      return response.statusCode;
+    } else {
+      throw Exception('Failed to review');
     }
   }
 }

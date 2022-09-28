@@ -5,6 +5,7 @@ import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/ui/detail_restaurant.dart';
 import 'package:restaurant_app/ui/restaurant_list.dart';
+import 'package:restaurant_app/ui/review_page.dart';
 import 'package:restaurant_app/ui/search_restaurant.dart';
 import 'package:restaurant_app/ui/splash_screen.dart';
 
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
           RestaurantList.routeName: (context) => RestaurantList(),
           RestaurantDetail.routeName: (context) => RestaurantDetail(),
           RestaurantSearch.routeName: (context) => RestaurantSearch(),
+          ReviewPage.routeName: (context) => ReviewPage(),
         },
       ),
     );

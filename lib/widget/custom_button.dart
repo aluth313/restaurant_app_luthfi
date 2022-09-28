@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/common/styles.dart';
+import 'package:restaurant_app/ui/review_page.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key});
+  final EdgeInsets padding;
+  final String text;
+  final VoidCallback onTap;
+
+  const CustomButton({
+    super.key,
+    required this.padding,
+    required this.text,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        
-      },
+      onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 15,
-          vertical: 8,
-        ),
+        padding: padding,
         decoration: BoxDecoration(
           color: greenColor,
           borderRadius: BorderRadius.circular(
@@ -22,10 +27,9 @@ class CustomButton extends StatelessWidget {
           ),
         ),
         child: Text(
-          'Beri Penilaian',
-          style: customStyleText.copyWith(
-            color: whiteColor
-          ),
+          text,
+          style: customStyleText.copyWith(color: whiteColor),
+          textAlign: TextAlign.center,
         ),
       ),
     );

@@ -76,10 +76,9 @@ class _RestaurantSearchState extends State<RestaurantSearch> {
                       state.searchRestaurant(value);
                     },
                     controller: state.searchController,
-                    // suffixIcon: Icon(
-                    //   Icons.clear_outlined,
-                    //   color: redColor,
-                    // ),
+                    prefixIcon: Icon(
+                      Icons.search_outlined,
+                    ),
                     // onTapSuffixIcon: () {
                     //   state.clearSearch();
                     // },
@@ -127,10 +126,8 @@ class _RestaurantSearchState extends State<RestaurantSearch> {
               rating: state.resultSearch.restaurants[index].rating,
             ),
             onTap: () {
-              state.detailRestaurant(
-                  state.resultSearch.restaurants[index].id);
-              Navigator.pushNamed(
-                  context, RestaurantDetail.routeName);
+              state.detailRestaurant(state.resultSearch.restaurants[index].id);
+              Navigator.pushNamed(context, RestaurantDetail.routeName);
             },
           );
         },

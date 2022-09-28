@@ -6,6 +6,7 @@ import 'package:restaurant_app/data/api/restaurant_service.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/data/model/restaurant_detail_model.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
+import 'package:restaurant_app/ui/review_page.dart';
 import 'package:restaurant_app/widget/custom_button.dart';
 import 'package:restaurant_app/widget/menu_card.dart';
 import 'package:restaurant_app/widget/review_card.dart';
@@ -249,7 +250,16 @@ class RestaurantDetail extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline6,
                   ),
                 ),
-                CustomButton(),
+                CustomButton(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 8,
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(context, ReviewPage.routeName);
+                  },
+                  text: 'Beri Penilaian',
+                ),
               ],
             ),
             SizedBox(
