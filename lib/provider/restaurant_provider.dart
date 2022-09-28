@@ -38,11 +38,6 @@ class RestaurantProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void clearSearch(){
-  //   _searchController.clear();
-  //   notifyListeners();
-  // }
-
   Future<dynamic> _fetchAllRestaurant() async {
     try {
       _state = ResultState.loading;

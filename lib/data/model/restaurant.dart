@@ -1,9 +1,5 @@
 import 'dart:convert';
 
-Restaurant restaurantFromJson(String str) => Restaurant.fromJson(json.decode(str));
-
-String restaurantToJson(Restaurant data) => json.encode(data.toJson());
-
 List<RestaurantElement> parseRestaurants(String? json) {
   if (json == null) {
     return [];

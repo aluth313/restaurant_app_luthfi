@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/ui/detail_restaurant.dart';
@@ -22,7 +23,8 @@ class RestaurantList extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  final restoProv = Provider.of<RestaurantProvider>(context, listen: false);
+                  final restoProv =
+                      Provider.of<RestaurantProvider>(context, listen: false);
                   restoProv.setSearch('');
                   Navigator.pushNamed(context, RestaurantSearch.routeName);
                 },
@@ -45,8 +47,13 @@ class RestaurantList extends StatelessWidget {
               Consumer<RestaurantProvider>(
                 builder: (context, state, _) {
                   if (state.state == ResultState.loading) {
-                    return Center(
-                      child: CircularProgressIndicator(),
+                    return Container(
+                      margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height / 3,
+                      ),
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
                     );
                   } else if (state.state == ResultState.hasData) {
                     return ListView.builder(
@@ -66,50 +73,35 @@ class RestaurantList extends StatelessWidget {
                       },
                     );
                   } else if (state.state == ResultState.noData) {
-                    return Center(
-                      child: Text(state.message),
+                    return Container(
+                      margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height / 3,
+                      ),
+                      child: Center(
+                        child: Text(state.message),
+                      ),
                     );
                   } else if (state.state == ResultState.error) {
-                    return Center(
-                      child: Text(state.message),
+                    return Container(
+                      margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height / 3,
+                      ),
+                      child: Center(
+                        child: Text(state.message),
+                      ),
                     );
                   } else {
-                    return Center(
-                      child: Text(''),
+                    return Container(
+                      margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height / 3,
+                      ),
+                      child: Center(
+                        child: Text(''),
+                      ),
                     );
                   }
                 },
               ),
-              // FutureBuilder(
-              //   future: DefaultAssetBundle.of(context)
-              //       .loadString('assets/local_restaurant.json'),
-              //   builder: (context, snapshot) {
-              //     if (snapshot.hasError) {
-              //       ScaffoldMessenger.of(context).showSnackBar(
-              //           SnackBar(content: Text('Data gagal ditampilkan.')));
-              //       return Center(child: Text('Data gagal ditampilkan.'));
-              //     }
-
-              //     if (snapshot.hasData) {
-              //       final List<RestaurantElement> restaurants =
-              //           parseRestaurants(snapshot.data);
-              //       return ListView.builder(
-              //         itemCount: restaurants.length,
-              //         physics: NeverScrollableScrollPhysics(),
-              //         shrinkWrap: true,
-              //         itemBuilder: (context, index) {
-              //           return RestaurantCard(
-              //             restaurantElement: restaurants[index],
-              //           );
-              //         },
-              //       );
-              //     }
-
-              //     return Center(
-              //       child: CircularProgressIndicator(),
-              //     );
-              //   },
-              // )
             ],
           ),
         ),

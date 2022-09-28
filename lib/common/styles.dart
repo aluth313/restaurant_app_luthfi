@@ -38,6 +38,4 @@ final TextTheme myTextTheme = TextTheme(
       fontSize: 10, fontWeight: FontWeight.w400, letterSpacing: 1.5),
 );
 
-// TextStyle splashText = GoogleFonts.poppins(
-//     color: Colors.white, fontSize: 23, fontWeight: FontWeight.w500);
 TextStyle customStyleText = GoogleFonts.poppins(color: Colors.black);

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/common/styles.dart';
-import 'package:restaurant_app/ui/review_page.dart';
 
 class CustomButton extends StatelessWidget {
   final EdgeInsets padding;

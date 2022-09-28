@@ -1,10 +1,4 @@
-import 'dart:convert';
-
 import 'package:restaurant_app/data/model/restaurant.dart';
-
-RestaurantSearchModel restaurantSearchModelFromJson(String str) => RestaurantSearchModel.fromJson(json.decode(str));
-
-String restaurantSearchModelToJson(RestaurantSearchModel data) => json.encode(data.toJson());
 
 class RestaurantSearchModel {
     RestaurantSearchModel({

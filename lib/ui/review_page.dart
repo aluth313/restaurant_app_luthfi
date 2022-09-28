@@ -48,7 +48,6 @@ class _ReviewPageState extends State<ReviewPage> {
                 right: 24,
               ),
               child: Column(
-                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CircleAvatar(
                     backgroundImage: NetworkImage(
@@ -73,9 +72,7 @@ class _ReviewPageState extends State<ReviewPage> {
                   Text(
                     widget.restaurantElement.city,
                     style: customStyleText.copyWith(
-                      // fontSize: 20,
                       color: secondaryColor,
-                      // fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -97,7 +94,6 @@ class _ReviewPageState extends State<ReviewPage> {
                         widget.restaurantElement.rating.toString(),
                         style: customStyleText.copyWith(
                           fontSize: 23,
-                          // color: secondaryColor,
                           fontWeight: FontWeight.bold,
                         ),
                         textAlign: TextAlign.center,

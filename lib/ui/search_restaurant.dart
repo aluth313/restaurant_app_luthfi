@@ -75,21 +75,12 @@ class _RestaurantSearchState extends State<RestaurantSearch> {
                       state.setSearch(value);
                       state.searchRestaurant(value);
                     },
-                    controller: state.searchController,
+                    controller: searchController,
                     prefixIcon: Icon(
                       Icons.search_outlined,
                     ),
-                    // onTapSuffixIcon: () {
-                    //   state.clearSearch();
-                    // },
                     hintText: 'Search...',
                   ),
-                  // Expanded(
-                  //     child: Center(
-                  //   child: Text(
-                  //     'Type something for search restaurant',
-                  //   ),
-                  // )),
                   SizedBox(
                     height: 10,
                   ),

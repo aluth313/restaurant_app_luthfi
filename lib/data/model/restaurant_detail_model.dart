@@ -1,10 +1,3 @@
-import 'package:meta/meta.dart';
-import 'dart:convert';
-
-RestaurantDetailModel restaurantDetailFromJson(String str) => RestaurantDetailModel.fromJson(json.decode(str));
-
-String restaurantDetailToJson(RestaurantDetailModel data) => json.encode(data.toJson());
-
 class RestaurantDetailModel {
     RestaurantDetailModel({
         required this.error,
