@@ -256,7 +256,7 @@ class RestaurantDetail extends StatelessWidget {
                     vertical: 8,
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, ReviewPage.routeName);
+                    Navigator.pushNamed(context, ReviewPage.routeName, arguments: restaurantElement);
                   },
                   text: 'Beri Penilaian',
                 ),

@@ -27,6 +27,7 @@ class TextFieldCustom extends StatelessWidget {
           ? TextFormField(
               cursorColor: blackColor,
               onChanged: onChanged,
+              controller: controller,
               decoration: InputDecoration(
                 hintText: hintText,
                 border: OutlineInputBorder(
@@ -43,6 +44,7 @@ class TextFieldCustom extends StatelessWidget {
           : TextFormField(
               cursorColor: blackColor,
               onChanged: onChanged,
+              controller: controller,
               decoration: InputDecoration(
                 hintText: hintText,
                 prefixIcon: prefixIcon,

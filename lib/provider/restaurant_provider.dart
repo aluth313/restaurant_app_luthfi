@@ -112,7 +112,7 @@ class RestaurantProvider extends ChangeNotifier {
       _state = ResultState.loading;
       notifyListeners();
       final responseCode = await restaurantService.review(id, name, review);
-      if (responseCode == 200) {
+      if (responseCode == 201) {
         _state = ResultState.hasData;
         notifyListeners();
         return responseCode;

@@ -2,14 +2,23 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/common/styles.dart';
+import 'package:restaurant_app/data/api/restaurant_service.dart';
+import 'package:restaurant_app/data/model/restaurant.dart';
+import 'package:restaurant_app/data/model/restaurant_detail_model.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
+import 'package:restaurant_app/ui/restaurant_list.dart';
 import 'package:restaurant_app/widget/custom_button.dart';
 import 'package:restaurant_app/widget/textfield.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class ReviewPage extends StatefulWidget {
   static const routeName = '/review';
+  final RestaurantDetailItem restaurantElement;
 
-  const ReviewPage({super.key});
+  const ReviewPage(
+    this.restaurantElement, {
+    super.key,
+  });
 
   @override
   State<ReviewPage> createState() => _ReviewPageState();
@@ -43,7 +52,7 @@ class _ReviewPageState extends State<ReviewPage> {
                 children: [
                   CircleAvatar(
                     backgroundImage: NetworkImage(
-                      'https://restaurant-api.dicoding.dev/images/small/14',
+                      '${RestaurantService.baseUrlImage}small/${widget.restaurantElement.pictureId}',
                     ),
                     radius: MediaQuery.of(context).size.width / 4,
                   ),
@@ -51,7 +60,7 @@ class _ReviewPageState extends State<ReviewPage> {
                     height: 10,
                   ),
                   Text(
-                    'The Glam Room',
+                    widget.restaurantElement.name,
                     style: customStyleText.copyWith(
                       fontSize: 23,
                       fontWeight: FontWeight.bold,
@@ -62,7 +71,7 @@ class _ReviewPageState extends State<ReviewPage> {
                     height: 8,
                   ),
                   Text(
-                    'Washington St, Bradford BD8 9QW',
+                    widget.restaurantElement.city,
                     style: customStyleText.copyWith(
                       // fontSize: 20,
                       color: secondaryColor,
@@ -85,7 +94,7 @@ class _ReviewPageState extends State<ReviewPage> {
                         width: 5,
                       ),
                       Text(
-                        '4.5',
+                        widget.restaurantElement.rating.toString(),
                         style: customStyleText.copyWith(
                           fontSize: 23,
                           // color: secondaryColor,
@@ -195,11 +204,20 @@ class _ReviewPageState extends State<ReviewPage> {
           ),
           text: 'Submit',
           onTap: () {
-            final restoProv = Provider.of<RestaurantProvider>(context, listen: false);
-            restoProv.review('s1knt6za9kkfw1e867', nameController.text, reviewController.text).then((response) {
-              // if (response == ) {
-                
-              // }
+            EasyLoading.show(status: 'loading...');
+            final restoProv =
+                Provider.of<RestaurantProvider>(context, listen: false);
+            restoProv
+                .review(widget.restaurantElement.id, nameController.text,
+                    reviewController.text)
+                .then((response) {
+              if (response == 201) {
+                EasyLoading.showSuccess('Berhasil Mengirimkan Review.');
+                Navigator.pushNamedAndRemoveUntil(
+                    context, RestaurantList.routeName, (route) => false);
+              } else {
+                EasyLoading.showError(response);
+              }
             });
           },
         ),
