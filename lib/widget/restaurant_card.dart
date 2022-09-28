@@ -7,8 +7,11 @@ class RestaurantCard extends StatelessWidget {
   final RestaurantElement restaurantElement;
   final VoidCallback onTap;
 
-  const RestaurantCard(
-      {super.key, required this.restaurantElement, required this.onTap});
+  const RestaurantCard({
+    super.key,
+    required this.restaurantElement,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {

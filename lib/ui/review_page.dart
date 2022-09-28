@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/common/styles.dart';
 import 'package:restaurant_app/data/api/restaurant_service.dart';
-import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/data/model/restaurant_detail_model.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/ui/restaurant_list.dart';
@@ -112,18 +111,19 @@ class _ReviewPageState extends State<ReviewPage> {
               child: CircleAvatar(
                 backgroundColor: greyColor,
                 child: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: defaultTargetPlatform == TargetPlatform.android
-                        ? Icon(
-                            Icons.arrow_back,
-                            color: blackColor,
-                          )
-                        : Icon(
-                            Icons.arrow_back_ios_outlined,
-                            color: blackColor,
-                          )),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: defaultTargetPlatform == TargetPlatform.android
+                      ? Icon(
+                          Icons.arrow_back,
+                          color: blackColor,
+                        )
+                      : Icon(
+                          Icons.arrow_back_ios_outlined,
+                          color: blackColor,
+                        ),
+                ),
               ),
             ),
           ],
@@ -176,7 +176,9 @@ class _ReviewPageState extends State<ReviewPage> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(18),
-                  borderSide: BorderSide(color: blackColor),
+                  borderSide: BorderSide(
+                    color: blackColor,
+                  ),
                 ),
               ),
             )

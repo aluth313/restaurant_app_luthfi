@@ -1,16 +1,3 @@
-import 'dart:convert';
-
-List<RestaurantElement> parseRestaurants(String? json) {
-  if (json == null) {
-    return [];
-  }
-
-  final List parsed = jsonDecode(json)['restaurants'];
-  return parsed
-      .map((parsed) => RestaurantElement.fromJson(parsed))
-      .toList();
-}
-
 class Restaurant {
     Restaurant({
         required this.error,
@@ -30,13 +17,6 @@ class Restaurant {
         count: json["count"],
         restaurants: List<RestaurantElement>.from(json["restaurants"].map((x) => RestaurantElement.fromJson(x))),
     );
-
-    Map<String, dynamic> toJson() => {
-        "error": error,
-        "message": message,
-        "count": count,
-        "restaurants": List<dynamic>.from(restaurants.map((x) => x.toJson())),
-    };
 }
 
 class RestaurantElement {
@@ -64,13 +44,4 @@ class RestaurantElement {
         city: json["city"],
         rating: json["rating"].toDouble(),
     );
-
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "description": description,
-        "pictureId": pictureId,
-        "city": city,
-        "rating": rating,
-    };
 }

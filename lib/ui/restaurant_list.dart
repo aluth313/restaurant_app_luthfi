@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/ui/detail_restaurant.dart';
@@ -15,7 +14,10 @@ class RestaurantList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 30.0),
+        padding: EdgeInsets.symmetric(
+          horizontal: 24.0,
+          vertical: 30.0,
+        ),
         child: SingleChildScrollView(
           physics: ScrollPhysics(),
           child: Column(

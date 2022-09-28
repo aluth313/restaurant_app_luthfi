@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/common/styles.dart';
 import 'package:restaurant_app/data/api/restaurant_service.dart';
-import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/data/model/restaurant_detail_model.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/ui/review_page.dart';
@@ -28,14 +27,17 @@ class RestaurantDetail extends StatelessWidget {
               width: double.infinity,
               height: 250,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(18),
-                    bottomRight: Radius.circular(18),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(18),
+                  bottomRight: Radius.circular(18),
+                ),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(
+                    '${RestaurantService.baseUrlImage}medium/${restaurantElement.pictureId}',
                   ),
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(
-                          '${RestaurantService.baseUrlImage}medium/${restaurantElement.pictureId}'))),
+                ),
+              ),
             ),
           ),
           Padding(
@@ -176,7 +178,10 @@ class RestaurantDetail extends StatelessWidget {
     Widget _foods(RestaurantDetailItem restaurantElement) {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 24),
-        margin: EdgeInsets.only(top: 20, bottom: 20),
+        margin: EdgeInsets.only(
+          top: 20,
+          bottom: 20,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -189,9 +194,10 @@ class RestaurantDetail extends StatelessWidget {
             ),
             GridView.builder(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 200,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5),
+                maxCrossAxisExtent: 200,
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 5,
+              ),
               itemCount: restaurantElement.menus.foods.length,
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -207,7 +213,10 @@ class RestaurantDetail extends StatelessWidget {
     Widget _drinks(RestaurantDetailItem restaurantElement) {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 24),
-        margin: EdgeInsets.only(top: 20, bottom: 20),
+        margin: EdgeInsets.only(
+          top: 20,
+          bottom: 20,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -220,9 +229,10 @@ class RestaurantDetail extends StatelessWidget {
             ),
             GridView.builder(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 200,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5),
+                maxCrossAxisExtent: 200,
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 5,
+              ),
               itemCount: restaurantElement.menus.drinks.length,
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -238,7 +248,10 @@ class RestaurantDetail extends StatelessWidget {
     Widget _reviews(RestaurantDetailItem restaurantElement) {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 24),
-        margin: EdgeInsets.only(top: 20, bottom: 20),
+        margin: EdgeInsets.only(
+          top: 20,
+          bottom: 20,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -256,7 +269,8 @@ class RestaurantDetail extends StatelessWidget {
                     vertical: 8,
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, ReviewPage.routeName, arguments: restaurantElement);
+                    Navigator.pushNamed(context, ReviewPage.routeName,
+                        arguments: restaurantElement);
                   },
                   text: 'Beri Penilaian',
                 ),

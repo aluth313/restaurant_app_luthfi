@@ -20,8 +20,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<RestaurantProvider>(
-      create: (context) =>
-          RestaurantProvider(restaurantService: RestaurantService()),
+      create: (context) => RestaurantProvider(
+        restaurantService: RestaurantService(),
+      ),
       child: MaterialApp(
         title: 'Restaurant App',
         debugShowCheckedModeBanner: false,
@@ -36,7 +37,8 @@ class MyApp extends StatelessWidget {
           RestaurantDetail.routeName: (context) => RestaurantDetail(),
           RestaurantSearch.routeName: (context) => RestaurantSearch(),
           ReviewPage.routeName: (context) => ReviewPage(
-                ModalRoute.of(context)?.settings.arguments as RestaurantDetailItem,
+                ModalRoute.of(context)?.settings.arguments
+                    as RestaurantDetailItem,
               ),
         },
       ),

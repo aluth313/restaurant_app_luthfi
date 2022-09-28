@@ -21,7 +21,9 @@ class SplashScreen extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage('assets/images/splash.png'),
+                image: AssetImage(
+                  'assets/images/splash.png',
+                ),
               ),
             ),
           ),
@@ -38,7 +40,9 @@ class SplashScreen extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              margin: EdgeInsets.only(bottom: 30),
+              margin: EdgeInsets.only(
+                bottom: 30,
+              ),
               child: Text(
                 'Get Your Favourite Foods',
                 style: customStyleText.copyWith(

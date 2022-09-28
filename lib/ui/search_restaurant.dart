@@ -73,7 +73,9 @@ class _RestaurantSearchState extends State<RestaurantSearch> {
                   TextFieldCustom(
                     onChanged: (value) {
                       state.setSearch(value);
-                      state.searchRestaurant(value);
+                      if (value.isNotEmpty) {
+                        state.searchRestaurant(value);
+                      }
                     },
                     controller: searchController,
                     prefixIcon: Icon(

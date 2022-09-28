@@ -16,10 +16,4 @@ class RestaurantSearchModel {
         founded: json["founded"],
         restaurants: List<RestaurantElement>.from(json["restaurants"].map((x) => RestaurantElement.fromJson(x))),
     );
-
-    Map<String, dynamic> toJson() => {
-        "error": error,
-        "founded": founded,
-        "restaurants": List<dynamic>.from(restaurants.map((x) => x.toJson())),
-    };
 }
