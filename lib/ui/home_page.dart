@@ -11,30 +11,30 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> _listWidget = [
-      RestaurantList(),
-      Center(
+    final List<Widget> listWidget = [
+      const RestaurantList(),
+      const Center(
         child: Text('Favourite'),
       ),
-      Center(
+      const Center(
         child: Text('Setting'),
       ),
     ];
 
-    final List<BottomNavigationBarItem> _bottomNavigationBarItems = [
-      BottomNavigationBarItem(
+    final List<BottomNavigationBarItem> bottomNavigationBarItems = [
+      const BottomNavigationBarItem(
         icon: Icon(
           Icons.home_outlined,
         ),
         label: 'Home',
       ),
-      BottomNavigationBarItem(
+      const BottomNavigationBarItem(
         icon: Icon(
           Icons.favorite_border_outlined,
         ),
         label: 'Favorite',
       ),
-      BottomNavigationBarItem(
+      const BottomNavigationBarItem(
         icon: Icon(
           Icons.settings_outlined,
         ),
@@ -45,9 +45,9 @@ class HomePage extends StatelessWidget {
     return Consumer<PageProvider>(
       builder: (context, data, _) {
         return Scaffold(
-          body: _listWidget[data.page],
+          body: listWidget[data.page],
           bottomNavigationBar: BottomNavigationBar(
-            items: _bottomNavigationBarItems,
+            items: bottomNavigationBarItems,
             selectedItemColor: blueColor,
             currentIndex: data.page,
             onTap: (value) {
