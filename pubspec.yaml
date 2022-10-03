@@ -40,6 +40,10 @@ dependencies:
   provider: ^6.0.3
   http: ^0.13.5
   flutter_easyloading: ^3.0.5
+  sqflite: ^2.1.0
+  flutter_local_notifications: ^11.0.1
+  android_alarm_manager_plus: ^2.0.7+1
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:

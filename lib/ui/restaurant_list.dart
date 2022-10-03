@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/ui/detail_restaurant.dart';
 import 'package:restaurant_app/ui/search_restaurant.dart';
+import 'package:restaurant_app/utils/result_state.dart';
 import 'package:restaurant_app/widget/restaurant_card.dart';
 
 class RestaurantList extends StatelessWidget {

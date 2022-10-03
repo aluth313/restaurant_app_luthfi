@@ -3,8 +3,10 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/api/restaurant_service.dart';
 import 'package:restaurant_app/data/model/restaurant_detail_model.dart';
+import 'package:restaurant_app/provider/page_provider.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/ui/detail_restaurant.dart';
+import 'package:restaurant_app/ui/home_page.dart';
 import 'package:restaurant_app/ui/restaurant_list.dart';
 import 'package:restaurant_app/ui/review_page.dart';
 import 'package:restaurant_app/ui/search_restaurant.dart';
@@ -19,10 +21,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<RestaurantProvider>(
-      create: (context) => RestaurantProvider(
-        restaurantService: RestaurantService(),
-      ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => RestaurantProvider(
+            restaurantService: RestaurantService(),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => PageProvider(),
+        )
+      ],
       child: MaterialApp(
         title: 'Restaurant App',
         debugShowCheckedModeBanner: false,
@@ -33,6 +42,7 @@ class MyApp extends StatelessWidget {
         builder: EasyLoading.init(),
         routes: {
           SplashScreen.routeName: (context) => const SplashScreen(),
+          HomePage.routeName: (context) => const HomePage(),
           RestaurantList.routeName: (context) => const RestaurantList(),
           RestaurantDetail.routeName: (context) => const RestaurantDetail(),
           RestaurantSearch.routeName: (context) => const RestaurantSearch(),

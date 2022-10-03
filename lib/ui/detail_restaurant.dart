@@ -6,6 +6,7 @@ import 'package:restaurant_app/data/api/restaurant_service.dart';
 import 'package:restaurant_app/data/model/restaurant_detail_model.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/ui/review_page.dart';
+import 'package:restaurant_app/utils/result_state.dart';
 import 'package:restaurant_app/widget/custom_button.dart';
 import 'package:restaurant_app/widget/menu_card.dart';
 import 'package:restaurant_app/widget/review_card.dart';
@@ -19,6 +20,7 @@ class RestaurantDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget _header(RestaurantDetailItem restaurantElement) {
       return Stack(
+        clipBehavior: Clip.none,
         children: [
           Hero(
             tag:
@@ -58,6 +60,33 @@ class RestaurantDetail extends StatelessWidget {
                             Icons.arrow_back_ios_outlined,
                             color: blackColor,
                           )),
+              ),
+            ),
+          ),
+          Positioned(
+            right: 1,
+            bottom: -30,
+            // height: 100,
+            // width: 100,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                right: 30,
+                left: 10,
+                bottom: 10,
+                top: 10,
+              ),
+              child: SafeArea(
+                child: CircleAvatar(
+                  backgroundColor: greyColor,
+                  child: IconButton(
+                    onPressed: () {
+                      // Navigator.pop(context);
+                    },
+                    icon: const Icon(
+                      Icons.favorite_border_outlined,
+                    ),
+                  ),
+                ),
               ),
             ),
           )

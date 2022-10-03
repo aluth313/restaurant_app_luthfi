@@ -3,8 +3,7 @@ import 'package:restaurant_app/data/api/restaurant_service.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/data/model/restaurant_detail_model.dart';
 import 'package:restaurant_app/data/model/restaurant_search_model.dart';
-
-enum ResultState { loading, noData, hasData, error }
+import 'package:restaurant_app/utils/result_state.dart';
 
 class RestaurantProvider extends ChangeNotifier {
   final RestaurantService restaurantService;

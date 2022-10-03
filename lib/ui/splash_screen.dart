@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/common/styles.dart';
+import 'package:restaurant_app/ui/home_page.dart';
 
 class SplashScreen extends StatelessWidget {
   static const routeName = '/splash_screen';
@@ -12,7 +13,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 3), () {
       Navigator.pushNamedAndRemoveUntil(
-          context, '/restaurant_list', (route) => false);
+          context, HomePage.routeName, (route) => false);
     });
     return Scaffold(
       body: Stack(
