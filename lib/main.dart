@@ -32,10 +32,10 @@ class MyApp extends StatelessWidget {
         initialRoute: SplashScreen.routeName,
         builder: EasyLoading.init(),
         routes: {
-          SplashScreen.routeName: (context) => SplashScreen(),
-          RestaurantList.routeName: (context) => RestaurantList(),
-          RestaurantDetail.routeName: (context) => RestaurantDetail(),
-          RestaurantSearch.routeName: (context) => RestaurantSearch(),
+          SplashScreen.routeName: (context) => const SplashScreen(),
+          RestaurantList.routeName: (context) => const RestaurantList(),
+          RestaurantDetail.routeName: (context) => const RestaurantDetail(),
+          RestaurantSearch.routeName: (context) => const RestaurantSearch(),
           ReviewPage.routeName: (context) => ReviewPage(
                 ModalRoute.of(context)?.settings.arguments
                     as RestaurantDetailItem,

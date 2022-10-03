@@ -48,17 +48,17 @@ class _RestaurantSearchState extends State<RestaurantSearch> {
                             Navigator.pop(context);
                           },
                           icon: defaultTargetPlatform == TargetPlatform.android
-                              ? Icon(
+                              ? const Icon(
                                   Icons.arrow_back,
                                   color: blackColor,
                                 )
-                              : Icon(
+                              : const Icon(
                                   Icons.arrow_back_ios_outlined,
                                   color: blackColor,
                                 ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 8,
                       ),
                       Text(
@@ -78,17 +78,17 @@ class _RestaurantSearchState extends State<RestaurantSearch> {
                       }
                     },
                     controller: searchController,
-                    prefixIcon: Icon(
+                    prefixIcon: const Icon(
                       Icons.search_outlined,
                     ),
                     hintText: 'Search...',
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Expanded(
                     child: state.searchController.text.isEmpty
-                        ? Center(
+                        ? const Center(
                             child: Text(
                               'Input untuk mencari data Restoran.',
                             ),
@@ -126,7 +126,7 @@ class _RestaurantSearchState extends State<RestaurantSearch> {
         },
       );
     } else if (state.stateSearch == ResultState.loading) {
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(),
       );
     } else if (state.stateSearch == ResultState.noData) {
@@ -138,7 +138,7 @@ class _RestaurantSearchState extends State<RestaurantSearch> {
         child: Text(state.message),
       );
     } else {
-      return Center(
+      return const Center(
         child: Text(''),
       );
     }

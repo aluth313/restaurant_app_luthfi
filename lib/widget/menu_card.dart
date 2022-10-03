@@ -11,7 +11,7 @@ class MenuCard extends StatelessWidget {
     return Container(
       width: 70,
       height: 70,
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         bottom: 10,
         right: 10,
       ),
@@ -26,7 +26,7 @@ class MenuCard extends StatelessWidget {
             child: Container(
               width: double.infinity,
               height: double.infinity,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage(
@@ -37,7 +37,7 @@ class MenuCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 8,
               vertical: 8,
             ),
@@ -48,7 +48,7 @@ class MenuCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               left: 8,
               right: 8,
               bottom: 8,

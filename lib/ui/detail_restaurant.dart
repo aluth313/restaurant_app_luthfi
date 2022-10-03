@@ -27,7 +27,7 @@ class RestaurantDetail extends StatelessWidget {
               width: double.infinity,
               height: 250,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(18),
                   bottomRight: Radius.circular(18),
                 ),
@@ -50,11 +50,11 @@ class RestaurantDetail extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     icon: defaultTargetPlatform == TargetPlatform.android
-                        ? Icon(
+                        ? const Icon(
                             Icons.arrow_back,
                             color: blackColor,
                           )
-                        : Icon(
+                        : const Icon(
                             Icons.arrow_back_ios_outlined,
                             color: blackColor,
                           )),
@@ -73,8 +73,8 @@ class RestaurantDetail extends StatelessWidget {
       }
 
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 24),
-        margin: EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        margin: const EdgeInsets.only(top: 20),
         child: Row(
           children: [
             Expanded(
@@ -85,17 +85,17 @@ class RestaurantDetail extends StatelessWidget {
                     restaurantElement.name,
                     style: Theme.of(context).textTheme.headline5,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.place_outlined,
                         size: 18,
                         color: secondaryColor,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       Expanded(
@@ -106,17 +106,17 @@ class RestaurantDetail extends StatelessWidget {
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.restaurant_outlined,
                         size: 18,
                         color: secondaryColor,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       Expanded(
@@ -131,15 +131,15 @@ class RestaurantDetail extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 8,
             ),
-            Icon(
+            const Icon(
               Icons.star_outlined,
               size: 20,
               color: yellowColor,
             ),
-            SizedBox(
+            const SizedBox(
               width: 5,
             ),
             Text(
@@ -153,8 +153,8 @@ class RestaurantDetail extends StatelessWidget {
 
     Widget _description(RestaurantDetailItem restaurantElement) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 24),
-        margin: EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        margin: const EdgeInsets.only(top: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -162,7 +162,7 @@ class RestaurantDetail extends StatelessWidget {
               'Description',
               style: Theme.of(context).textTheme.headline6,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
@@ -177,8 +177,8 @@ class RestaurantDetail extends StatelessWidget {
 
     Widget _foods(RestaurantDetailItem restaurantElement) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 24),
-        margin: EdgeInsets.only(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        margin: const EdgeInsets.only(
           top: 20,
           bottom: 20,
         ),
@@ -189,17 +189,17 @@ class RestaurantDetail extends StatelessWidget {
               'Foods',
               style: Theme.of(context).textTheme.headline6,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             GridView.builder(
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 200,
                 crossAxisSpacing: 5,
                 mainAxisSpacing: 5,
               ),
               itemCount: restaurantElement.menus.foods.length,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return MenuCard(restaurantElement.menus.foods[index].name);
@@ -212,8 +212,8 @@ class RestaurantDetail extends StatelessWidget {
 
     Widget _drinks(RestaurantDetailItem restaurantElement) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 24),
-        margin: EdgeInsets.only(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        margin: const EdgeInsets.only(
           top: 20,
           bottom: 20,
         ),
@@ -224,17 +224,17 @@ class RestaurantDetail extends StatelessWidget {
               'Drinks',
               style: Theme.of(context).textTheme.headline6,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             GridView.builder(
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 200,
                 crossAxisSpacing: 5,
                 mainAxisSpacing: 5,
               ),
               itemCount: restaurantElement.menus.drinks.length,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return MenuCard(restaurantElement.menus.drinks[index].name);
@@ -247,8 +247,8 @@ class RestaurantDetail extends StatelessWidget {
 
     Widget _reviews(RestaurantDetailItem restaurantElement) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 24),
-        margin: EdgeInsets.only(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        margin: const EdgeInsets.only(
           top: 20,
           bottom: 20,
         ),
@@ -264,7 +264,7 @@ class RestaurantDetail extends StatelessWidget {
                   ),
                 ),
                 CustomButton(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 15,
                     vertical: 8,
                   ),
@@ -276,12 +276,12 @@ class RestaurantDetail extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             ListView.builder(
               itemCount: restaurantElement.customerReviews.length,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return ReviewCard(
@@ -298,13 +298,13 @@ class RestaurantDetail extends StatelessWidget {
       body: Consumer<RestaurantProvider>(
         builder: (context, data, child) {
           if (data.stateDetail == ResultState.loading) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (data.stateDetail == ResultState.hasData) {
             return ListView(
               padding: EdgeInsets.zero,
-              physics: ScrollPhysics(),
+              physics: const ScrollPhysics(),
               children: [
                 _header(data.resultDetail.restaurantDetailItem),
                 _title(data.resultDetail.restaurantDetailItem),
@@ -323,7 +323,7 @@ class RestaurantDetail extends StatelessWidget {
               child: Text(data.message),
             );
           } else {
-            return Center(
+            return const Center(
               child: Text(''),
             );
           }

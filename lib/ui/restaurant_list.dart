@@ -14,12 +14,12 @@ class RestaurantList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: 24.0,
           vertical: 30.0,
         ),
         child: SingleChildScrollView(
-          physics: ScrollPhysics(),
+          physics: const ScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -31,9 +31,9 @@ class RestaurantList extends StatelessWidget {
                   Navigator.pushNamed(context, RestaurantSearch.routeName);
                 },
                 child: Container(
-                  margin: EdgeInsets.only(top: 20),
+                  margin: const EdgeInsets.only(top: 20),
                   alignment: Alignment.centerRight,
-                  child: Icon(
+                  child: const Icon(
                     Icons.search_outlined,
                   ),
                 ),
@@ -53,7 +53,7 @@ class RestaurantList extends StatelessWidget {
                       margin: EdgeInsets.only(
                         top: MediaQuery.of(context).size.height / 3,
                       ),
-                      child: Center(
+                      child: const Center(
                         child: CircularProgressIndicator(),
                       ),
                     );
@@ -97,7 +97,7 @@ class RestaurantList extends StatelessWidget {
                       margin: EdgeInsets.only(
                         top: MediaQuery.of(context).size.height / 3,
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(''),
                       ),
                     );

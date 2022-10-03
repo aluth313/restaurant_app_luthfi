@@ -41,7 +41,7 @@ class _ReviewPageState extends State<ReviewPage> {
         child: Stack(
           children: [
             Container(
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                 top: 20,
                 left: 24,
                 right: 24,
@@ -54,7 +54,7 @@ class _ReviewPageState extends State<ReviewPage> {
                     ),
                     radius: MediaQuery.of(context).size.width / 4,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
@@ -65,7 +65,7 @@ class _ReviewPageState extends State<ReviewPage> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   Text(
@@ -75,18 +75,18 @@ class _ReviewPageState extends State<ReviewPage> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.star_outlined,
                         size: 23,
                         color: yellowColor,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       Text(
@@ -99,15 +99,15 @@ class _ReviewPageState extends State<ReviewPage> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Divider(),
+                  const Divider(),
                 ],
               ),
             ),
             Container(
-              margin: EdgeInsets.only(left: 24),
+              margin: const EdgeInsets.only(left: 24),
               child: CircleAvatar(
                 backgroundColor: greyColor,
                 child: IconButton(
@@ -115,11 +115,11 @@ class _ReviewPageState extends State<ReviewPage> {
                     Navigator.pop(context);
                   },
                   icon: defaultTargetPlatform == TargetPlatform.android
-                      ? Icon(
+                      ? const Icon(
                           Icons.arrow_back,
                           color: blackColor,
                         )
-                      : Icon(
+                      : const Icon(
                           Icons.arrow_back_ios_outlined,
                           color: blackColor,
                         ),
@@ -133,7 +133,7 @@ class _ReviewPageState extends State<ReviewPage> {
 
     Widget _review() {
       return Container(
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
           top: 20,
           left: 24,
           right: 24,
@@ -151,7 +151,7 @@ class _ReviewPageState extends State<ReviewPage> {
               hintText: 'Name...',
               controller: nameController,
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Text(
@@ -160,7 +160,7 @@ class _ReviewPageState extends State<ReviewPage> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             TextFormField(
@@ -176,7 +176,7 @@ class _ReviewPageState extends State<ReviewPage> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(18),
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: blackColor,
                   ),
                 ),
@@ -196,7 +196,7 @@ class _ReviewPageState extends State<ReviewPage> {
           bottom: 30,
         ),
         child: CustomButton(
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: 15,
             vertical: 15,
           ),

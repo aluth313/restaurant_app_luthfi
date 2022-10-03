@@ -18,7 +18,7 @@ class TextFieldCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         top: 10,
       ),
       child: prefixIcon == null
@@ -33,7 +33,7 @@ class TextFieldCustom extends StatelessWidget {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(18),
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: secondaryColor,
                   ),
                 ),
@@ -51,7 +51,7 @@ class TextFieldCustom extends StatelessWidget {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(18),
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: secondaryColor,
                   ),
                 ),
