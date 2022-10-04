@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurant_app/common/styles.dart';
+import 'package:restaurant_app/provider/favourite_provider.dart';
 import 'package:restaurant_app/ui/home_page.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -12,6 +14,8 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 3), () {
+      final provider = Provider.of<FavouriteProvider>(context, listen: false);
+      provider.removeDb();
       Navigator.pushNamedAndRemoveUntil(
           context, HomePage.routeName, (route) => false);
     });

@@ -24,10 +24,17 @@ class DatabaseHelper {
           description TEXT,
           pictureId TEXT,
           city TEXT,
-          rating TEXT,
+          rating TEXT
         )
         ''');
       },
+      // onUpgrade: (db, oldVersion, newVersion) {
+      //   if (oldVersion < newVersion) {
+      //     db.execute('''
+      //     ALTER TABLE $_tblFavourite MODIFY rating REAL;
+      //     ''');
+      //   }
+      // },
       version: 1,
     );
 
@@ -40,6 +47,11 @@ class DatabaseHelper {
     return _database;
   }
 
+  Future<void> removeDb() async {
+    final db = await database;
+    db!.delete(_tblFavourite);
+  }
+
   Future<void> insertFavourite(RestaurantElement restaurantElement) async {
     final db = await database;
     await db!.insert(_tblFavourite, restaurantElement.toJson());
@@ -50,6 +62,22 @@ class DatabaseHelper {
     List<Map<String, dynamic>> results = await db!.query(_tblFavourite);
 
     return results.map((res) => RestaurantElement.fromJson(res)).toList();
+  }
+
+  Future<Map> getRestaurantFavouriteById(String id) async {
+    final db = await database;
+
+    List<Map<String, dynamic>> results = await db!.query(
+      _tblFavourite,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+    if (results.isNotEmpty) {
+      return results.first;
+    }else{
+      return {};
+    }
   }
 
   Future<void> removeFavourite(String id) async {

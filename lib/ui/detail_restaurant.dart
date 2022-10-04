@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/common/styles.dart';
 import 'package:restaurant_app/data/api/restaurant_service.dart';
+import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/data/model/restaurant_detail_model.dart';
+import 'package:restaurant_app/provider/favourite_provider.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/ui/review_page.dart';
 import 'package:restaurant_app/utils/result_state.dart';
@@ -63,32 +65,61 @@ class RestaurantDetail extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            right: 1,
-            bottom: -30,
-            // height: 100,
-            // width: 100,
-            child: Padding(
-              padding: const EdgeInsets.only(
-                right: 30,
-                left: 10,
-                bottom: 10,
-                top: 10,
-              ),
-              child: SafeArea(
-                child: CircleAvatar(
-                  backgroundColor: greyColor,
-                  child: IconButton(
-                    onPressed: () {
-                      // Navigator.pop(context);
-                    },
-                    icon: const Icon(
-                      Icons.favorite_border_outlined,
+          Consumer<FavouriteProvider>(
+            builder: (context, provider, _) {
+              return FutureBuilder<bool>(
+                future: provider.isFavourite(restaurantElement.id),
+                builder: (context, snapshot) {
+                  var isFavourite = snapshot.data ?? false;
+                  return Positioned(
+                    right: 1,
+                    bottom: -30,
+                    // height: 100,
+                    // width: 100,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        right: 30,
+                        left: 10,
+                        bottom: 10,
+                        top: 10,
+                      ),
+                      child: SafeArea(
+                        child: CircleAvatar(
+                          backgroundColor: greyColor,
+                          child: IconButton(
+                            onPressed: () {
+                              if (isFavourite) {
+                                provider.deleteFavourite(restaurantElement.id);
+                              } else {
+                                provider.addFavoutire(
+                                  RestaurantElement(
+                                    id: restaurantElement.id,
+                                    name: restaurantElement.name,
+                                    description: restaurantElement.description,
+                                    pictureId: restaurantElement.pictureId,
+                                    city: restaurantElement.city,
+                                    rating: restaurantElement.rating,
+                                  ),
+                                );
+                              }
+                            },
+                            icon: isFavourite
+                                ? const Icon(
+                                    Icons.favorite_outlined,
+                                    color: pinkColor,
+                                  )
+                                : const Icon(
+                                    Icons.favorite_border_outlined,
+                                    color: pinkColor,
+                                  ),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-            ),
+                  );
+                },
+              );
+            },
           )
         ],
       );

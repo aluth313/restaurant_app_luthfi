@@ -7,6 +7,7 @@ const Color whiteColor = Colors.white;
 const Color blackColor = Colors.black;
 const Color blueColor = Colors.blue;
 const Color redColor = Colors.red;
+const Color pinkColor = Colors.pink;
 const Color greyColor = Color(0xffF3F3F3);
 const Color greenColor = Color(0xff0EC3AE);
 const Color cardReviewColor = Color(0xffF8F9FD);
