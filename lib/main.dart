@@ -3,8 +3,10 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/api/restaurant_service.dart';
 import 'package:restaurant_app/data/model/restaurant_detail_model.dart';
+import 'package:restaurant_app/provider/favourite_provider.dart';
 import 'package:restaurant_app/provider/page_provider.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
+import 'package:restaurant_app/provider/setting_provider.dart';
 import 'package:restaurant_app/ui/detail_restaurant.dart';
 import 'package:restaurant_app/ui/home_page.dart';
 import 'package:restaurant_app/ui/restaurant_list.dart';
@@ -30,7 +32,13 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => PageProvider(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SettingProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => FavouriteProvider(),
+        ),
       ],
       child: MaterialApp(
         title: 'Restaurant App',

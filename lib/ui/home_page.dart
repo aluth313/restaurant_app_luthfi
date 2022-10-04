@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/common/styles.dart';
 import 'package:restaurant_app/provider/page_provider.dart';
+import 'package:restaurant_app/ui/favourite_page.dart';
 import 'package:restaurant_app/ui/restaurant_list.dart';
+import 'package:restaurant_app/ui/setting_page.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = '/home';
@@ -13,12 +15,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Widget> listWidget = [
       const RestaurantList(),
-      const Center(
-        child: Text('Favourite'),
-      ),
-      const Center(
-        child: Text('Setting'),
-      ),
+      const FavouritePage(),
+      const SettingPage(),
     ];
 
     final List<BottomNavigationBarItem> bottomNavigationBarItems = [
@@ -51,7 +49,7 @@ class HomePage extends StatelessWidget {
             selectedItemColor: blueColor,
             currentIndex: data.page,
             onTap: (value) {
-              data.setPage(context, value);
+              data.setPage(value);
             },
           ),
         );

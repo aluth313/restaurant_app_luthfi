@@ -6,7 +6,7 @@ class PageProvider extends ChangeNotifier {
 
   int get page => _page;
 
-  void setPage(BuildContext context, int index){
+  void setPage(int index){
     _page = index;
     notifyListeners();
   }
