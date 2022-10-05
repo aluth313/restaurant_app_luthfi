@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/common/styles.dart';
 import 'package:restaurant_app/data/preferences/preferences_helper.dart';
+import 'package:restaurant_app/provider/scheduling_provider.dart';
 import 'package:restaurant_app/provider/setting_provider.dart';
+import 'package:restaurant_app/widget/custom_dialog.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -53,12 +57,17 @@ class SettingPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Consumer<SettingProvider>(
+                    Consumer<SchedulingProvider>(
                       builder: (context, state, child) {
                         return Switch.adaptive(
-                          value: state.isActive,
-                          onChanged: (value) {
-                            state.setNotif(value);
+                          value: state.isScheduled,
+                          onChanged: (value) async {
+                            if (Platform.isIOS) {
+                              customDialog(context);
+                            }else{
+                              state.scheduledNotif(value);
+                            }
+                            // state.setNotif(value);
                           },
                         );
                       },

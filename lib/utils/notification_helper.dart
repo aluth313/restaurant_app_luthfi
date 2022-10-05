@@ -15,7 +15,7 @@ final didReceiveLocalNotificationSubject =
     BehaviorSubject<ReceivedNotification>();
 
 class NotificationHelper {
-  static const _channelId = "01";
+  static const _channelId = "1";
   static const _channelName = "channel_01";
   static const _channelDesc = "dicoding channel";
   static NotificationHelper? _instance;
@@ -31,18 +31,18 @@ class NotificationHelper {
     var initializationSettingsAndroid =
         const AndroidInitializationSettings('app_icon');
 
-    var initializationSettingsIOs = DarwinInitializationSettings(
+    var initializationSettingsIOs = const DarwinInitializationSettings(
       requestAlertPermission: false,
       requestBadgePermission: false,
       requestSoundPermission: false,
-      onDidReceiveLocalNotification: (id, title, body, payload) async {
-        didReceiveLocalNotificationSubject.add(ReceivedNotification(
-          id: id,
-          title: title,
-          body: body,
-          payload: payload,
-        ));
-      },
+      // onDidReceiveLocalNotification: (id, title, body, payload) async {
+      //   didReceiveLocalNotificationSubject.add(ReceivedNotification(
+      //     id: id,
+      //     title: title,
+      //     body: body,
+      //     payload: payload,
+      //   ));
+      // },
     );
 
     var initializationSettings = InitializationSettings(
@@ -52,7 +52,7 @@ class NotificationHelper {
 
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
-      onDidReceiveBackgroundNotificationResponse: (details) {
+      onDidReceiveNotificationResponse: (details) async {
         final payload = details.payload;
         if (payload != null) {
           print('notification payload: $payload');
@@ -104,13 +104,14 @@ class NotificationHelper {
   // }
 
   Future<void> showNotification(
-      FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
+      FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin, Restaurant restaurantList) async {
     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
         _channelId, _channelName,
         channelDescription: _channelDesc,
         importance: Importance.max,
         priority: Priority.high,
-        ticker: 'ticker');
+        ticker: 'ticker',
+        styleInformation: DefaultStyleInformation(true, true));
 
     var iOSPlatformChannelSpecifics = const DarwinNotificationDetails();
 
@@ -119,7 +120,7 @@ class NotificationHelper {
       iOS: iOSPlatformChannelSpecifics,
     );
 
-    var restaurantList = await RestaurantService().restaurantList();
+    // var restaurantList = await RestaurantService().restaurantList();
     var restaurants = restaurantList.restaurants;
 
     var randomIndex = Random().nextInt(restaurants.length);
@@ -133,13 +134,14 @@ class NotificationHelper {
       titleNotification,
       titleNews,
       platformChannelSpecifics,
+      payload: json.encode(restaurantList.toJson())
     );
   }
 
   void configureSelectNotificationSubject(String route) {
     selectNotificationSubject.stream.listen((String payload) async {
-      var data = RestaurantElement.fromJson(json.decode(payload));
-      var restaurant = data;
+      var data = Restaurant.fromJson(json.decode(payload));
+      var restaurant = data.restaurants[0];
       Navigation.intentWithData(route, restaurant);
     });
   }
