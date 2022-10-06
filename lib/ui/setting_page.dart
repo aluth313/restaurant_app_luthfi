@@ -57,17 +57,22 @@ class SettingPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Consumer<SchedulingProvider>(
-                      builder: (context, state, child) {
-                        return Switch.adaptive(
-                          value: state.isScheduled,
-                          onChanged: (value) async {
-                            if (Platform.isIOS) {
-                              customDialog(context);
-                            }else{
-                              state.scheduledNotif(value);
-                            }
-                            // state.setNotif(value);
+                    Consumer<SettingProvider>(
+                      builder: (context, settingProvider, _) {
+                        return Consumer<SchedulingProvider>(
+                          builder: (context, state, child) {
+                            return Switch.adaptive(
+                              value: settingProvider.isActive,
+                              onChanged: (value) async {
+                                if (Platform.isIOS) {
+                                  customDialog(context);
+                                } else {
+                                  settingProvider.setNotif(value);
+                                  state.scheduledNotif(value);
+                                }
+                                // state.setNotif(value);
+                              },
+                            );
                           },
                         );
                       },

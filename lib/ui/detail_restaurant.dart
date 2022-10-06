@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app/common/navigation.dart';
 import 'package:restaurant_app/common/styles.dart';
 import 'package:restaurant_app/data/api/restaurant_service.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
@@ -51,7 +52,7 @@ class RestaurantDetail extends StatelessWidget {
                 backgroundColor: greyColor,
                 child: IconButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigation.back();
                     },
                     icon: defaultTargetPlatform == TargetPlatform.android
                         ? const Icon(

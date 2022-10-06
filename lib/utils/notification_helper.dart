@@ -134,15 +134,19 @@ class NotificationHelper {
       titleNotification,
       titleNews,
       platformChannelSpecifics,
-      payload: json.encode(restaurantList.toJson())
+      payload: randomRestaurant.id
     );
   }
 
-  void configureSelectNotificationSubject(String route) {
+  void configureSelectNotificationSubject(String route, BuildContext context) {
     selectNotificationSubject.stream.listen((String payload) async {
-      var data = Restaurant.fromJson(json.decode(payload));
-      var restaurant = data.restaurants[0];
-      Navigation.intentWithData(route, restaurant);
+      // var data = Restaurant.fromJson(json.decode(payload));
+      // var restaurant = data.restaurants[0];
+      print('route');
+      print(route);
+      print('payload');
+      print(payload);
+      Navigation.intentWithData(route, payload, context);
     });
   }
 }
