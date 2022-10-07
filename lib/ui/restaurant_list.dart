@@ -68,11 +68,14 @@ class RestaurantList extends StatelessWidget {
                         return RestaurantCard(
                           restaurantElement: state.result.restaurants[index],
                           onTap: () {
-                            state.detailRestaurant(
-                                state.result.restaurants[index].id);
+                            // state.detailRestaurant(
+                            //     state.result.restaurants[index].id);
                             // Navigation.intentWithData(RestaurantDetail.routeName, state.resultDetail);
                             Navigator.pushNamed(
-                                context, RestaurantDetail.routeName);
+                              context,
+                              RestaurantDetail.routeName,
+                              arguments: state.result.restaurants[index].id,
+                            );
                           },
                         );
                       },

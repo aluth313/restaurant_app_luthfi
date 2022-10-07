@@ -6,6 +6,7 @@ import 'package:restaurant_app/common/styles.dart';
 import 'package:restaurant_app/data/api/restaurant_service.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/data/model/restaurant_detail_model.dart';
+import 'package:restaurant_app/provider/detail_restaurant_provider.dart';
 import 'package:restaurant_app/provider/favourite_provider.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/ui/review_page.dart';
@@ -14,10 +15,26 @@ import 'package:restaurant_app/widget/custom_button.dart';
 import 'package:restaurant_app/widget/menu_card.dart';
 import 'package:restaurant_app/widget/review_card.dart';
 
-class RestaurantDetail extends StatelessWidget {
+class RestaurantDetail extends StatefulWidget {
   static const routeName = '/restaurant_detail';
+  final String id;
 
-  const RestaurantDetail({super.key});
+  const RestaurantDetail(this.id, {super.key});
+
+  @override
+  State<RestaurantDetail> createState() => _RestaurantDetailState();
+}
+
+class _RestaurantDetailState extends State<RestaurantDetail> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final provider =
+          Provider.of<DetailRestaurantProvider>(context, listen: false);
+      provider.detailRestaurant(widget.id);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,19 +67,24 @@ class RestaurantDetail extends StatelessWidget {
             child: SafeArea(
               child: CircleAvatar(
                 backgroundColor: greyColor,
-                child: IconButton(
-                    onPressed: () {
-                      Navigation.back();
-                    },
-                    icon: defaultTargetPlatform == TargetPlatform.android
-                        ? const Icon(
-                            Icons.arrow_back,
-                            color: blackColor,
-                          )
-                        : const Icon(
-                            Icons.arrow_back_ios_outlined,
-                            color: blackColor,
-                          )),
+                child: Consumer<DetailRestaurantProvider>(
+                  builder: (context, detailRestaurantProvider, _) {
+                    return IconButton(
+                        onPressed: () {
+                          detailRestaurantProvider.setStateDetailBack();
+                          Navigation.back();
+                        },
+                        icon: defaultTargetPlatform == TargetPlatform.android
+                            ? const Icon(
+                                Icons.arrow_back,
+                                color: blackColor,
+                              )
+                            : const Icon(
+                                Icons.arrow_back_ios_outlined,
+                                color: blackColor,
+                              ));
+                  },
+                ),
               ),
             ),
           ),
@@ -356,7 +378,7 @@ class RestaurantDetail extends StatelessWidget {
     }
 
     return Scaffold(
-      body: Consumer<RestaurantProvider>(
+      body: Consumer<DetailRestaurantProvider>(
         builder: (context, data, child) {
           if (data.stateDetail == ResultState.loading) {
             return const Center(

@@ -146,7 +146,7 @@ class NotificationHelper {
       print(route);
       print('payload');
       print(payload);
-      Navigation.intentWithData(route, payload, context);
+      Navigation.intentWithData(route, payload);
     });
   }
 }

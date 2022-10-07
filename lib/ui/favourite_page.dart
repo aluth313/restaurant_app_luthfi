@@ -46,13 +46,16 @@ class FavouritePage extends StatelessWidget {
                               return RestaurantCard(
                                 restaurantElement: provider.restaurants[index],
                                 onTap: () {
-                                  final getDetailRestaurant =
-                                      Provider.of<RestaurantProvider>(context,
-                                          listen: false);
-                                  getDetailRestaurant.detailRestaurant(
-                                      provider.restaurants[index].id);
+                                  // final getDetailRestaurant =
+                                  //     Provider.of<RestaurantProvider>(context,
+                                  //         listen: false);
+                                  // getDetailRestaurant.detailRestaurant(
+                                  //     provider.restaurants[index].id);
                                   Navigator.pushNamed(
-                                      context, RestaurantDetail.routeName);
+                                    context,
+                                    RestaurantDetail.routeName,
+                                    arguments: provider.restaurants[index].id,
+                                  );
                                 },
                               );
                             },

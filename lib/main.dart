@@ -11,6 +11,7 @@ import 'package:restaurant_app/common/navigation.dart';
 import 'package:restaurant_app/data/api/restaurant_service.dart';
 import 'package:restaurant_app/data/model/restaurant_detail_model.dart';
 import 'package:restaurant_app/data/preferences/preferences_helper.dart';
+import 'package:restaurant_app/provider/detail_restaurant_provider.dart';
 import 'package:restaurant_app/provider/favourite_provider.dart';
 import 'package:restaurant_app/provider/page_provider.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
@@ -26,7 +27,8 @@ import 'package:restaurant_app/utils/background_service.dart';
 import 'package:restaurant_app/utils/notification_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -73,6 +75,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => SchedulingProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => DetailRestaurantProvider(
+            restaurantService: RestaurantService(),
+          ),
+        ),
       ],
       child: MaterialApp(
         navigatorKey: navigatorKey,
@@ -87,7 +94,9 @@ class MyApp extends StatelessWidget {
           SplashScreen.routeName: (context) => const SplashScreen(),
           HomePage.routeName: (context) => const HomePage(),
           RestaurantList.routeName: (context) => const RestaurantList(),
-          RestaurantDetail.routeName: (context) => const RestaurantDetail(),
+          RestaurantDetail.routeName: (context) => RestaurantDetail(
+                ModalRoute.of(context)?.settings.arguments as String,
+              ),
           RestaurantSearch.routeName: (context) => const RestaurantSearch(),
           ReviewPage.routeName: (context) => ReviewPage(
                 ModalRoute.of(context)?.settings.arguments
