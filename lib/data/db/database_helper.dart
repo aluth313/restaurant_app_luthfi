@@ -28,13 +28,6 @@ class DatabaseHelper {
         )
         ''');
       },
-      // onUpgrade: (db, oldVersion, newVersion) {
-      //   if (oldVersion < newVersion) {
-      //     db.execute('''
-      //     ALTER TABLE $_tblFavourite MODIFY rating REAL;
-      //     ''');
-      //   }
-      // },
       version: 1,
     );
 
@@ -46,11 +39,6 @@ class DatabaseHelper {
 
     return _database;
   }
-
-  // Future<void> removeDb() async {
-  //   final db = await database;
-  //   db!.delete(_tblFavourite);
-  // }
 
   Future<void> insertFavourite(RestaurantElement restaurantElement) async {
     final db = await database;

@@ -26,8 +26,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
-// String? initialRoute;
-// String? selectedNotificationPayload;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,16 +38,6 @@ Future<void> main() async {
   if (Platform.isAndroid) {
     await AndroidAlarmManager.initialize();
   }
-
-  // final NotificationAppLaunchDetails? notificationAppLaunchDetails = !kIsWeb &&
-  //         Platform.isLinux
-  //     ? null
-  //     : await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
-  // initialRoute = SplashScreen.routeName;
-  // if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
-  //   redirectPage = notificationAppLaunchDetails!.notificationResponse?.payload;
-  //   // initialRoute = RestaurantDetail.routeName;
-  // }
 
   await _notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
 

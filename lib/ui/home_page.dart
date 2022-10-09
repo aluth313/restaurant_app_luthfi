@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/common/navigation.dart';
 import 'package:restaurant_app/common/styles.dart';
 import 'package:restaurant_app/provider/page_provider.dart';
 import 'package:restaurant_app/ui/detail_restaurant.dart';
@@ -26,9 +25,6 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _notificationHelper
         .configureSelectNotificationSubject(RestaurantDetail.routeName);
-    // if(redirectPage != null){
-    //   Navigation.intentWithData(RestaurantDetail.routeName, redirectPage!);
-    // }
   }
 
   @override

@@ -8,7 +8,6 @@ import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/data/model/restaurant_detail_model.dart';
 import 'package:restaurant_app/provider/detail_restaurant_provider.dart';
 import 'package:restaurant_app/provider/favourite_provider.dart';
-import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/ui/review_page.dart';
 import 'package:restaurant_app/utils/result_state.dart';
 import 'package:restaurant_app/widget/custom_button.dart';
@@ -97,8 +96,6 @@ class _RestaurantDetailState extends State<RestaurantDetail> {
                   return Positioned(
                     right: 1,
                     bottom: -30,
-                    // height: 100,
-                    // width: 100,
                     child: Padding(
                       padding: const EdgeInsets.only(
                         right: 30,
@@ -352,8 +349,11 @@ class _RestaurantDetailState extends State<RestaurantDetail> {
                     vertical: 8,
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, ReviewPage.routeName,
-                        arguments: restaurantElement);
+                    Navigator.pushNamed(
+                      context,
+                      ReviewPage.routeName,
+                      arguments: restaurantElement,
+                    );
                   },
                   text: 'Beri Penilaian',
                 ),
