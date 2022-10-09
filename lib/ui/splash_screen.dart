@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/common/styles.dart';
 import 'package:restaurant_app/provider/favourite_provider.dart';
+import 'package:restaurant_app/ui/detail_restaurant.dart';
 import 'package:restaurant_app/ui/home_page.dart';
+import 'package:restaurant_app/utils/notification_helper.dart';
 
 class SplashScreen extends StatelessWidget {
   static const routeName = '/splash_screen';
@@ -14,8 +16,6 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 3), () {
-      final provider = Provider.of<FavouriteProvider>(context, listen: false);
-      provider.removeDb();
       Navigator.pushNamedAndRemoveUntil(
           context, HomePage.routeName, (route) => false);
     });

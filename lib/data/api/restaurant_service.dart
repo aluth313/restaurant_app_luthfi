@@ -8,9 +8,10 @@ import 'package:restaurant_app/data/model/restaurant_search_model.dart';
 class RestaurantService {
   static const String _baseUrl = 'https://restaurant-api.dicoding.dev/';
   static const String baseUrlImage = '${_baseUrl}images/';
+  http.Client client = http.Client();
 
   Future<Restaurant> restaurantList() async {
-    final response = await http.get(Uri.parse('${_baseUrl}list'));
+    final response = await client.get(Uri.parse('${_baseUrl}list'));
     if (response.statusCode == 200) {
       return Restaurant.fromJson(jsonDecode(response.body));
     } else {
@@ -19,7 +20,7 @@ class RestaurantService {
   }
 
   Future<RestaurantDetailModel> restaurantDetail(String id) async {
-    final response = await http.get(Uri.parse('${_baseUrl}detail/$id'));
+    final response = await client.get(Uri.parse('${_baseUrl}detail/$id'));
     if (response.statusCode == 200) {
       return RestaurantDetailModel.fromJson(jsonDecode(response.body));
     } else {
@@ -28,7 +29,7 @@ class RestaurantService {
   }
 
   Future<RestaurantSearchModel> searchRestaurant(String query) async {
-    final response = await http.get(Uri.parse('${_baseUrl}search?q=$query'));
+    final response = await client.get(Uri.parse('${_baseUrl}search?q=$query'));
     if (response.statusCode == 200) {
       return RestaurantSearchModel.fromJson(jsonDecode(response.body));
     } else {
@@ -37,7 +38,7 @@ class RestaurantService {
   }
 
   Future<dynamic> review(String id, String name, String review) async {
-    final response = await http.post(Uri.parse('${_baseUrl}review'),
+    final response = await client.post(Uri.parse('${_baseUrl}review'),
         headers: <String, String>{'Content-Type': 'application/json'},
         body: jsonEncode(<String, String>{
           'id': id,

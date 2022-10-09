@@ -1,7 +1,4 @@
-// import 'dart:html';
-
 import 'dart:io';
-
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -29,6 +26,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
+// String? initialRoute;
+// String? selectedNotificationPayload;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +40,16 @@ Future<void> main() async {
   if (Platform.isAndroid) {
     await AndroidAlarmManager.initialize();
   }
+
+  // final NotificationAppLaunchDetails? notificationAppLaunchDetails = !kIsWeb &&
+  //         Platform.isLinux
+  //     ? null
+  //     : await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+  // initialRoute = SplashScreen.routeName;
+  // if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
+  //   redirectPage = notificationAppLaunchDetails!.notificationResponse?.payload;
+  //   // initialRoute = RestaurantDetail.routeName;
+  // }
 
   await _notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
 
@@ -95,8 +104,7 @@ class MyApp extends StatelessWidget {
           HomePage.routeName: (context) => const HomePage(),
           RestaurantList.routeName: (context) => const RestaurantList(),
           RestaurantDetail.routeName: (context) => RestaurantDetail(
-                ModalRoute.of(context)?.settings.arguments as String,
-              ),
+              ModalRoute.of(context)?.settings.arguments as String),
           RestaurantSearch.routeName: (context) => const RestaurantSearch(),
           ReviewPage.routeName: (context) => ReviewPage(
                 ModalRoute.of(context)?.settings.arguments

@@ -19,61 +19,57 @@ class FavouritePage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
             horizontal: 24,
           ),
-          child: Consumer<FavouriteProvider>(
-            builder: (context, state, _) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Favourites',
-                    style: customStyleText.copyWith(
-                      fontSize: 23,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Expanded(
-                    child: Consumer<FavouriteProvider>(
-                      builder: (context, provider, child) {
-                        if (provider.state == ResultState.hasData) {
-                          return ListView.builder(
-                            itemCount: provider.restaurants.length,
-                            // physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              return RestaurantCard(
-                                restaurantElement: provider.restaurants[index],
-                                onTap: () {
-                                  // final getDetailRestaurant =
-                                  //     Provider.of<RestaurantProvider>(context,
-                                  //         listen: false);
-                                  // getDetailRestaurant.detailRestaurant(
-                                  //     provider.restaurants[index].id);
-                                  Navigator.pushNamed(
-                                    context,
-                                    RestaurantDetail.routeName,
-                                    arguments: provider.restaurants[index].id,
-                                  );
-                                },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Favourites',
+                style: customStyleText.copyWith(
+                  fontSize: 23,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Expanded(
+                child: Consumer<FavouriteProvider>(
+                  builder: (context, provider, child) {
+                    if (provider.state == ResultState.hasData) {
+                      return ListView.builder(
+                        itemCount: provider.restaurants.length,
+                        // physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return RestaurantCard(
+                            restaurantElement: provider.restaurants[index],
+                            onTap: () {
+                              // final getDetailRestaurant =
+                              //     Provider.of<RestaurantProvider>(context,
+                              //         listen: false);
+                              // getDetailRestaurant.detailRestaurant(
+                              //     provider.restaurants[index].id);
+                              Navigator.pushNamed(
+                                context,
+                                RestaurantDetail.routeName,
+                                arguments: provider.restaurants[index].id,
                               );
                             },
                           );
-                        } else {
-                          return Center(
-                            child: Text(
-                              provider.message,
-                              style: customStyleText,
-                            ),
-                          );
-                        }
-                      },
-                    ),
-                  ),
-                ],
-              );
-            },
+                        },
+                      );
+                    } else {
+                      return Center(
+                        child: Text(
+                          provider.message,
+                          style: customStyleText,
+                        ),
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
           ),
         ),
       ),

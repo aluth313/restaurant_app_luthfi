@@ -138,8 +138,10 @@ class NotificationHelper {
     );
   }
 
-  void configureSelectNotificationSubject(String route, BuildContext context) {
+  void configureSelectNotificationSubject(String route) {
+    print('masuk function');
     selectNotificationSubject.stream.listen((String payload) async {
+      print('masuk select');
       // var data = Restaurant.fromJson(json.decode(payload));
       // var restaurant = data.restaurants[0];
       print('route');

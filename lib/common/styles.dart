@@ -41,3 +41,5 @@ final TextTheme myTextTheme = TextTheme(
 );
 
 TextStyle customStyleText = GoogleFonts.poppins(color: Colors.black);
+
+// String? redirectPage;

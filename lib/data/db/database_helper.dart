@@ -16,7 +16,7 @@ class DatabaseHelper {
   Future<Database> _initializeDb() async {
     var path = await getDatabasesPath();
     var db = openDatabase(
-      '$path/restaurantapp.db',
+      '$path/favouriterestaurantapp.db',
       onCreate: (db, version) async {
         await db.execute('''CREATE TABLE $_tblFavourite (
           id TEXT PRIMARY KEY,
@@ -47,10 +47,10 @@ class DatabaseHelper {
     return _database;
   }
 
-  Future<void> removeDb() async {
-    final db = await database;
-    db!.delete(_tblFavourite);
-  }
+  // Future<void> removeDb() async {
+  //   final db = await database;
+  //   db!.delete(_tblFavourite);
+  // }
 
   Future<void> insertFavourite(RestaurantElement restaurantElement) async {
     final db = await database;

@@ -6,7 +6,7 @@ import 'package:restaurant_app/utils/result_state.dart';
 class FavouriteProvider extends ChangeNotifier {
   List<RestaurantElement> _restaurants = [];
   late DatabaseHelper _dbHelper;
-  late ResultState _state;
+  ResultState _state = ResultState.noData;
   String _message = '';
 
   List<RestaurantElement> get restaurants => _restaurants;
@@ -16,10 +16,6 @@ class FavouriteProvider extends ChangeNotifier {
   FavouriteProvider(){
     _dbHelper = DatabaseHelper();
     _getAllRestaurantFavourites();
-  }
-
-  void removeDb() async {
-    await _dbHelper.removeDb();
   }
 
   void _getAllRestaurantFavourites() async {
