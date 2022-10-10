@@ -120,8 +120,11 @@ class _RestaurantSearchState extends State<RestaurantSearch> {
               rating: state.resultSearch.restaurants[index].rating,
             ),
             onTap: () {
-              state.detailRestaurant(state.resultSearch.restaurants[index].id);
-              Navigator.pushNamed(context, RestaurantDetail.routeName);
+              Navigator.pushNamed(
+                context,
+                RestaurantDetail.routeName,
+                arguments: state.resultSearch.restaurants[index].id,
+              );
             },
           );
         },
