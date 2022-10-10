@@ -70,7 +70,6 @@ class _RestaurantDetailState extends State<RestaurantDetail> {
                   builder: (context, detailRestaurantProvider, _) {
                     return IconButton(
                         onPressed: () {
-                          detailRestaurantProvider.setStateDetailBack();
                           Navigation.back();
                         },
                         icon: defaultTargetPlatform == TargetPlatform.android

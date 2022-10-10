@@ -18,11 +18,6 @@ class DetailRestaurantProvider extends ChangeNotifier {
   RestaurantDetailModel get resultDetail => _restaurantDetailModel;
   ResultState get stateDetail => _stateDetail;
 
-  void setStateDetailBack(){
-    _stateDetail = ResultState.loading;
-    notifyListeners();
-  }
-
   Future<dynamic> detailRestaurant(String id) async {
     try {
       _stateDetail = ResultState.loading;
